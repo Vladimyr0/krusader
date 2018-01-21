@@ -742,18 +742,17 @@ void KRQuery::setMimeType(const QString &typeIn, QStringList customList)
 
 bool KRQuery::isExcluded(const QUrl &url)
 {
-    for (int i = 0; i < whereNotToSearch.count(); ++i)
-        if (whereNotToSearch[i].isParentOf(url) ||
-            url.matches(whereNotToSearch[i], QUrl::StripTrailingSlash))
+    for (QUrl &item : whereNotToSearch)
+        if (item.isParentOf(url) || url.matches(item, QUrl::StripTrailingSlash))
             return true;
 
     // Exclude folder names that are configured in settings
     QString filename = url.fileName();
-    for (int i = 0; i < excludedFolderNames.count(); ++i)
-        if (filename == excludedFolderNames[i])
+    for (QString &item : excludedFolderNames)
+        if (filename == item)
             return true;
 
-    if (!matchDirName(url.fileName()))
+    if (!matchDirName(filename))
         return true;
 
     return false;

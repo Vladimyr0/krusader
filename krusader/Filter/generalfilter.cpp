@@ -235,10 +235,12 @@ GeneralFilter::GeneralFilter(FilterTabs *tabs, int properties, QWidget *parent,
         dontSearchInLayout->addWidget(dontSearchIn, 0, 0, 1, 2);
 
         if (properties & FilterTabs::HasRecurseOptions) {
+            KConfigGroup group(krConfig, "Search");
+
             useExcludeFolderNames = new QCheckBox(this);
             useExcludeFolderNames->setText(i18n("Exclude Folder Names"));
             useExcludeFolderNames->setToolTip(i18n("Filters out specified directory names from the results."));
-            useExcludeFolderNames->setChecked(true);
+            useExcludeFolderNames->setChecked(static_cast<Qt::CheckState>(group.readEntry("ExcludeFolderNamesUse", 0)));
             dontSearchInLayout->addWidget(useExcludeFolderNames, 1, 0, 1, 1);
 
             excludeFolderNames = new KHistoryComboBox(false, dontSearchInGroup);
@@ -251,10 +253,11 @@ GeneralFilter::GeneralFilter(FilterTabs *tabs, int properties, QWidget *parent,
             excludeFolderNames->setMinimumContentsLength(10);
             excludeFolderNames->lineEdit()->setPlaceholderText("Enter colon separated folder names");
             dontSearchInLayout->addWidget(excludeFolderNames, 1, 1, 1, 1);
-
-            KConfigGroup group(krConfig, "Search");
-            QStringList list = group.readEntry("Exclude Folder Names History", QStringList());
-            excludeFolderNames->setHistoryItems(list);
+            excludeFolderNames->setHistoryItems(group.readEntry("ExcludeFolderNamesHistory", QStringList()));
+            excludeFolderNames->setEditText(group.readEntry("ExcludeFolderNames", ""));
+            if (!useExcludeFolderNames->isChecked()) {
+                excludeFolderNames->setDisabled(true);
+            }
 
             connect(useExcludeFolderNames, &QCheckBox::toggled, excludeFolderNames, &KHistoryComboBox::setEnabled);
         }
@@ -430,7 +433,9 @@ GeneralFilter::~GeneralFilter()
     if (properties & FilterTabs::HasDontSearchIn) {
         if (properties & FilterTabs::HasRecurseOptions) {
             list = excludeFolderNames->historyItems();
-            group.writeEntry("Exclude Folder Names History", list);
+            group.writeEntry("ExcludeFolderNamesHistory", list);
+            group.writeEntry("ExcludeFolderNames", excludeFolderNames->currentText());
+            group.writeEntry("ExcludeFolderNamesUse", static_cast<int>(useExcludeFolderNames->checkState()));
         }
     }
     krConfig->sync();
