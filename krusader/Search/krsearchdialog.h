@@ -130,6 +130,8 @@ private:
     static bool    lastSearchInArchives;
     static bool    lastFollowSymLinks;
     static bool    lastContainsRegExp;
+    static bool    lastUseExcludeFolderNames;
+    static QString lastExcludeFolderNames;
 
     int            sizeX;
     int            sizeY;

@@ -132,6 +132,8 @@ bool KrSearchDialog::lastSearchForCase = false;
 bool KrSearchDialog::lastContainsWholeWord = false;
 bool KrSearchDialog::lastContainsWithCase = false;
 bool KrSearchDialog::lastSearchInSubDirs = true;
+bool KrSearchDialog::lastUseExcludeFolderNames = false;
+QString KrSearchDialog::lastExcludeFolderNames = NULL;
 bool KrSearchDialog::lastSearchInArchives = false;
 bool KrSearchDialog::lastFollowSymLinks = false;
 bool KrSearchDialog::lastContainsRegExp = false;
@@ -319,6 +321,9 @@ KrSearchDialog::KrSearchDialog(QString profile, QWidget* parent)
         generalFilter->containsTextCase->setChecked(lastContainsWithCase);
         generalFilter->containsRegExp->setChecked(lastContainsRegExp);
         generalFilter->searchInDirs->setChecked(lastSearchInSubDirs);
+        generalFilter->useExcludeFolderNames->setChecked(lastUseExcludeFolderNames);
+        if(lastExcludeFolderNames != NULL)
+          generalFilter->excludeFolderNames->setEditText(lastExcludeFolderNames);
         generalFilter->searchInArchives->setChecked(lastSearchInArchives);
         generalFilter->followLinks->setChecked(lastFollowSymLinks);
         // the path in the active panel should be the default search location
@@ -365,6 +370,8 @@ void KrSearchDialog::closeDialog(bool isAccept)
     lastContainsWithCase = generalFilter->containsTextCase->isChecked();
     lastContainsRegExp = generalFilter->containsRegExp->isChecked();
     lastSearchInSubDirs = generalFilter->searchInDirs->isChecked();
+    lastUseExcludeFolderNames = generalFilter->useExcludeFolderNames->isChecked();
+    lastExcludeFolderNames = generalFilter->excludeFolderNames->currentText();
     lastSearchInArchives = generalFilter->searchInArchives->isChecked();
     lastFollowSymLinks = generalFilter->followLinks->isChecked();
     hide();
