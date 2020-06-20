@@ -290,7 +290,15 @@ void Synchronizer::compareDirectory(SynchronizerFileItem *parent, SynchronizerDi
                 if (checkIfSelected && !selectedFiles.contains(left_file_name))
                     continue;
 
-                if (excludedPaths.contains(leftDir.isEmpty() ? left_file_name : leftDir + '/' + left_file_name))
+                // Exclude the left-side folder if it's inside the exclusion list
+                bool mustBeExcluded = false;
+                for (const auto &excludedPath : query->dontSearchInDirs()) {
+                    if (excludedPath.fileName() == (leftDir.isEmpty() ? left_file_name : leftDir + '/' + left_file_name)) {
+                        mustBeExcluded = true;
+                        break;
+                    }
+                }
+                if (mustBeExcluded)
                     continue;
 
                 if (!query->matchDirName(left_file_name))
@@ -331,7 +339,15 @@ void Synchronizer::compareDirectory(SynchronizerFileItem *parent, SynchronizerDi
                 if (checkIfSelected && !selectedFiles.contains(file_name))
                     continue;
 
-                if (excludedPaths.contains(rightDir.isEmpty() ? file_name : rightDir + '/' + file_name))
+                // Exclude the right-side folder if it's inside the exclusion list
+                bool mustBeExcluded = false;
+                for (const auto &excludedPath : query->dontSearchInDirs()) {
+                    if (excludedPath.fileName() == (rightDir.isEmpty() ? file_name : rightDir + '/' + file_name)) {
+                        mustBeExcluded = true;
+                        break;
+                    }
+                }
+                if (mustBeExcluded)
                     continue;
 
                 if (!query->matchDirName(file_name))
