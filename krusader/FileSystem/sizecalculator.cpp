@@ -180,5 +180,7 @@ void SizeCalculator::done()
 
 void SizeCalculator::emitProgress()
 {
-    emit progressChanged((m_urls.length() - (float)m_nextUrls.length()) / m_urls.length() * 100);
+    emit progressChanged(static_cast<int>(
+                         static_cast<double>(m_urls.length() - m_nextUrls.length()) / m_urls.length() * 100
+                         ));
 }
