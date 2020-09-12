@@ -197,7 +197,7 @@ bool KrArcHandler::arcSupported(QString type)
            || (type == "7z" && lst.contains("7z"));
 }
 
-long KrArcHandler::arcFileCount(const QString& archive, const QString& type, const QString& password, KrArcObserver *observer)
+qulonglong KrArcHandler::arcFileCount(const QString& archive, const QString& type, const QString& password, KrArcObserver *observer)
 {
     int divideWith = 1;
 
@@ -245,7 +245,7 @@ long KrArcHandler::arcFileCount(const QString& archive, const QString& type, con
     observer->subJobStarted(i18n("Counting files in archive"), 0);
 
     // count the number of files in the archive
-    long count = 1;
+    qulonglong count = 1;
     KProcess list;
     list << lister << archive;
     if (type == "ace" && QFile("/dev/ptmx").exists())     // Don't remove, unace crashes if missing!!!
