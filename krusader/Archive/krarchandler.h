@@ -59,7 +59,7 @@ public:
     explicit KrArcHandler(QObject *parent = nullptr);
 
     // return the number of files in the archive
-    long arcFileCount(const QString& archive, const QString& type, const QString& password, KrArcObserver *observer);
+    qulonglong arcFileCount(const QString& archive, const QString& type, const QString& password, KrArcObserver *observer);
     // unpack an archive to destination directory
     bool unpack(QString archive, const QString& type, const QString& password, const QString& dest, KrArcObserver *observer );
     // pack an archive to destination directory
