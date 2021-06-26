@@ -137,6 +137,8 @@
 //#define _PermCheck     true
 // AutoMount //////////
 #define _AutoMount        false
+// Enable Vi-like navigation
+#define _ViNavigation     false
 // Preserving date //////////
 #define _PreserveAttributes false
 // Nonmount Points ////

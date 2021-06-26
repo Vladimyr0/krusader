@@ -253,7 +253,7 @@ void KrView::initProperties()
 
     _properties = new KrViewProperties(displayIcons, numericPermissions, sortOptions, sortMethod,
                                        humanReadableSize, localeAwareCompareIsCaseSensitive,
-                                       atomicExtensions);
+                                       atomicExtensions, grpSvr.readEntry("Vi Mode", false));
 }
 
 void KrView::showPreviews(bool show)
@@ -676,7 +676,12 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
         }
         return true;
     }
-    case Qt::Key_Backspace :
+    case Qt::Key_H :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        [[fallthrough]];
+    case Qt::Key_Backspace : [[fallthrough]];
             // Terminal Emulator bugfix
     case Qt::Key_Left :
         if (e->modifiers() == Qt::ControlModifier || e->modifiers() == Qt::ShiftModifier ||
@@ -689,6 +694,11 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             op()->emitDirUp();
         }
         return true; // safety
+    case Qt::Key_L :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        [[fallthrough]];
     case Qt::Key_Right :
         if (e->modifiers() == Qt::ControlModifier || e->modifiers() == Qt::ShiftModifier ||
                 e->modifiers() == Qt::AltModifier) {
@@ -701,6 +711,11 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
                 op()->emitGoInside(i->name());
         }
         return true;
+    case Qt::Key_K :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        [[fallthrough]];
     case Qt::Key_Up :
         if (e->modifiers() == Qt::ControlModifier) {
             // let the panel handle it - jump to the Location Bar
@@ -720,6 +735,11 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             }
         }
         return true;
+    case Qt::Key_J :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        [[fallthrough]];
     case Qt::Key_Down :
         if (e->modifiers() == Qt::ControlModifier || e->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier)) {
             // let the panel handle it - jump to command line
@@ -736,6 +756,24 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
                     setCurrentKrViewItem(item);
                     makeItemVisible(item);
                 }
+            }
+        }
+        return true;
+    case Qt::Key_G:
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        if (e->modifiers() & Qt::ShiftModifier) {
+            KrViewItem *last = getLast();
+            if (last) {
+                setCurrentKrViewItem(last);
+                makeItemVisible(last);
+            }
+        } else {
+            KrViewItem * first = getFirst();
+            if (first) {
+                setCurrentKrViewItem(first);
+                makeItemVisible(first);
             }
         }
         return true;
