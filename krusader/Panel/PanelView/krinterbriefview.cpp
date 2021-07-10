@@ -151,12 +151,30 @@ void KrInterBriefView::keyPressEvent(QKeyEvent *e)
 
 bool KrInterBriefView::handleKeyEvent(QKeyEvent *e)
 {
+    auto briefViewSpecialKeysUsed = [this](QKeyEvent *e) -> bool {
+        if (properties()->useViNavigation) {
+            if (e->key() == Qt::Key_H || e->key() == Qt::Key_L) {
+                return true;
+            }
+        }
 
-    if (((e->key() != Qt::Key_Left && e->key() != Qt::Key_Right) || (e->modifiers() == Qt::ControlModifier)) && (KrView::handleKeyEvent(e)))
-        // did the view class handled the event?
+        if (e->key() == Qt::Key_Left || e->key() == Qt::Key_Right) {
+            return true;
+        };
+
+        return false;
+    };
+
+    if ((!briefViewSpecialKeysUsed(e) || (e->modifiers() == Qt::ControlModifier)) && (KrView::handleKeyEvent(e)))
+        // did the view class handle the event?
         return true;
 
     switch (e->key()) {
+    case Qt::Key_L :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        [[fallthrough]];
     case Qt::Key_Right : {
         KrViewItem *i = getCurrentKrViewItem();
         KrViewItem *newCurrent = i;
@@ -183,6 +201,11 @@ bool KrInterBriefView::handleKeyEvent(QKeyEvent *e)
             op()->emitSelectionChanged();
         return true;
     }
+    case Qt::Key_H :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+        [[fallthrough]];
     case Qt::Key_Left : {
         KrViewItem *i = getCurrentKrViewItem();
         KrViewItem *newCurrent = i;
