@@ -582,15 +582,15 @@
 
       <qandaentry>
         <question id="faqu_custom_embed_term">
-          <para>How to customize the embedded terminal of Krusader?</para>
+          <para>How to customize the embedded terminal of &krusader?</para>
         </question>
         <answer>
-          <para>In order to change proprieties of the
-          embedded terminal emulator of Krusader: you
+          <para>In order to change properties of the
+          embedded terminal emulator of &krusader: you
           can right-click on it and choose an option,
           and if you don't find there what you are looking
-          for, you can use the Settings menu of Konsole
-          (because Krusader uses a Konsole KPart for its
+          for, you can use the Settings menu of &konsole
+          (because &krusader uses a &konsole KPart for its
           embedded terminal). In that menu, other items
           are seen (like "Manage Profiles...").
           </para>
