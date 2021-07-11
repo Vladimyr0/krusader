@@ -589,10 +589,17 @@
           embedded terminal emulator of &krusader: you
           can right-click on it and choose an option,
           and if you don't find there what you are looking
-          for, you can use the Settings menu of &konsole
+          for, you can use the 
+            <menuchoice>
+              <guimenu>Settings</guimenu>
+            </menuchoice>
+          menu of &konsole
           (because &krusader uses a &konsole KPart for its
           embedded terminal). In that menu, other items
-          are seen (like "Manage Profiles...").
+          are seen (like 
+            <menuchoice>
+              <guimenuitem>"Manage Profiles..."</guimenuitem>
+            </menuchoice>).
           </para>
           <para></para>
           <!-- Empty line to make it more readable -->
