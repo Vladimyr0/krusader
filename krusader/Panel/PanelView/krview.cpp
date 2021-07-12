@@ -607,6 +607,22 @@ void KrView::clear()
 
 bool KrView::handleKeyEvent(QKeyEvent *e)
 {
+    auto setLastItemAsCurrent = [&]() {
+        KrViewItem *last = getLast();
+        if (last) {
+            setCurrentKrViewItem(last);
+            makeItemVisible(last);
+        }
+    };
+
+    auto setFirstItemAsCurrent = [&]() {
+        KrViewItem * first = getFirst();
+        if (first) {
+            setCurrentKrViewItem(first);
+            makeItemVisible(first);
+        }
+    };
+
     qDebug() << "key event=" << e;
     switch (e->key()) {
     case Qt::Key_Enter :
@@ -764,17 +780,9 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             return false;
         }
         if (e->modifiers() & Qt::ShiftModifier) {
-            KrViewItem *last = getLast();
-            if (last) {
-                setCurrentKrViewItem(last);
-                makeItemVisible(last);
-            }
+            setLastItemAsCurrent();
         } else {
-            KrViewItem * first = getFirst();
-            if (first) {
-                setCurrentKrViewItem(first);
-                makeItemVisible(first);
-            }
+            setFirstItemAsCurrent();
         }
         return true;
     case Qt::Key_Home: {
@@ -793,11 +801,7 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             }
             op()->setMassSelectionUpdate(false);
         }
-        KrViewItem * first = getFirst();
-        if (first) {
-            setCurrentKrViewItem(first);
-            makeItemVisible(first);
-        }
+        setFirstItemAsCurrent();
     }
     return true;
     case Qt::Key_End:
@@ -816,11 +820,7 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             }
             op()->setMassSelectionUpdate(false);
         } else {
-            KrViewItem *last = getLast();
-            if (last) {
-                setCurrentKrViewItem(last);
-                makeItemVisible(last);
-            }
+            setLastItemAsCurrent();
         }
         return true;
     case Qt::Key_PageDown: {
