@@ -623,22 +623,6 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
         }
     };
 
-    auto setPageDownItemAsCurrent = [&]() {
-        KrViewItem * current = getCurrentKrViewItem();
-        int downStep = itemsPerPage();
-        while (downStep != 0 && current) {
-            KrViewItem * newCurrent = getNext(current);
-            if (newCurrent == nullptr)
-                break;
-            current = newCurrent;
-            downStep--;
-        }
-        if (current) {
-            setCurrentKrViewItem(current);
-            makeItemVisible(current);
-        }
-    };
-
     qDebug() << "key event=" << e;
     switch (e->key()) {
     case Qt::Key_Enter :
@@ -844,16 +828,28 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             return false;
         }
 
-        if (e->modifiers() & Qt::ControlModifier) {
-            setPageDownItemAsCurrent();
+        if (!(e->modifiers() & Qt::ControlModifier)) {
+            // Delete current file if the key `d` pressed in vi-mode
+            op()->emitDefaultDeleteFiles();
             return true;
         }
 
-        op()->emitDefaultDeleteFiles();
-
-        return true;
+        // Go page down if `^D` was pressed in vi-mode
+        [[fallthrough]];
     case Qt::Key_PageDown: {
-        setPageDownItemAsCurrent();
+        KrViewItem * current = getCurrentKrViewItem();
+        int downStep = itemsPerPage();
+        while (downStep != 0 && current) {
+            KrViewItem * newCurrent = getNext(current);
+            if (newCurrent == nullptr)
+                break;
+            current = newCurrent;
+            downStep--;
+        }
+        if (current) {
+            setCurrentKrViewItem(current);
+            makeItemVisible(current);
+        }
         return true;
     }
     case Qt::Key_U :
