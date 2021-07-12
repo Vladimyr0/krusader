@@ -856,6 +856,15 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
         setPageDownItemAsCurrent();
         return true;
     }
+    case Qt::Key_U :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+
+        if (!(e->modifiers() & Qt::ControlModifier)) {
+            return false;
+        }
+        [[fallthrough]];
     case Qt::Key_PageUp: {
         KrViewItem * current = getCurrentKrViewItem();
         int upStep = itemsPerPage();
