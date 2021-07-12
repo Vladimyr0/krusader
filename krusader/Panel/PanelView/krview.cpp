@@ -849,7 +849,9 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             return true;
         }
 
-        return false;
+        op()->emitDefaultDeleteFiles();
+
+        return true;
     case Qt::Key_PageDown: {
         setPageDownItemAsCurrent();
         return true;
