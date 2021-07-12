@@ -623,6 +623,22 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
         }
     };
 
+    auto setPageDownItemAsCurrent = [&]() {
+        KrViewItem * current = getCurrentKrViewItem();
+        int downStep = itemsPerPage();
+        while (downStep != 0 && current) {
+            KrViewItem * newCurrent = getNext(current);
+            if (newCurrent == nullptr)
+                break;
+            current = newCurrent;
+            downStep--;
+        }
+        if (current) {
+            setCurrentKrViewItem(current);
+            makeItemVisible(current);
+        }
+    };
+
     qDebug() << "key event=" << e;
     switch (e->key()) {
     case Qt::Key_Enter :
@@ -823,20 +839,19 @@ bool KrView::handleKeyEvent(QKeyEvent *e)
             setLastItemAsCurrent();
         }
         return true;
+    case Qt::Key_D :
+        if (!properties()->useViNavigation) {
+            return false;
+        }
+
+        if (e->modifiers() & Qt::ControlModifier) {
+            setPageDownItemAsCurrent();
+            return true;
+        }
+
+        return false;
     case Qt::Key_PageDown: {
-        KrViewItem * current = getCurrentKrViewItem();
-        int downStep = itemsPerPage();
-        while (downStep != 0 && current) {
-            KrViewItem * newCurrent = getNext(current);
-            if (newCurrent == nullptr)
-                break;
-            current = newCurrent;
-            downStep--;
-        }
-        if (current) {
-            setCurrentKrViewItem(current);
-            makeItemVisible(current);
-        }
+        setPageDownItemAsCurrent();
         return true;
     }
     case Qt::Key_PageUp: {
