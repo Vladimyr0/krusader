@@ -239,7 +239,7 @@ GeneralFilter::GeneralFilter(FilterTabs *tabs, int properties, QWidget *parent, 
         searchLayout->addWidget(dontSearchIn, 0, 0, 1, 2);
 
         if (properties & FilterTabs::HasRecurseOptions) {
-            KConfigGroup group(krConfig, "Search");
+            KConfigGroup group(krState, "Search");
 
             useExcludeFolderNames = createExcludeCheckBox(group);
             searchLayout->addWidget(useExcludeFolderNames, 1, 0, 1, 1);
@@ -389,7 +389,7 @@ GeneralFilter::GeneralFilter(FilterTabs *tabs, int properties, QWidget *parent, 
 
     // load the completion and history lists
     // ==> search for
-    KConfigGroup group(krConfig, "Search");
+    KConfigGroup group(krState, "Search");
     QStringList list = group.readEntry("SearchFor Completion", QStringList());
     searchFor->completionObject()->setItems(list);
     list = group.readEntry("SearchFor History", QStringList());
@@ -411,7 +411,7 @@ GeneralFilter::~GeneralFilter()
     // save the history combos
     // ==> search for
     QStringList list = searchFor->completionObject()->items();
-    KConfigGroup group(krConfig, "Search");
+    KConfigGroup group(krState, "Search");
     group.writeEntry("SearchFor Completion", list);
     list = searchFor->historyItems();
     group.writeEntry("SearchFor History", list);

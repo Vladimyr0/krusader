@@ -482,7 +482,7 @@ ParameterSelect::ParameterSelect(const exp_parameter &parameter, QWidget *parent
     layout->addWidget(_combobox = new KComboBox(this));
     _combobox->setEditable(true);
 
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     QStringList lst = group.readEntry("Predefined Selections", QStringList());
     if (lst.size() > 0)
         _combobox->addItems(lst);

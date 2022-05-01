@@ -31,7 +31,7 @@ ProfileManager::ProfileManager(const QString &profileType, QWidget *parent)
 
     connect(this, &ProfileManager::clicked, this, &ProfileManager::profilePopup);
 
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     profileList = group.readEntry(profileType, QStringList());
 }
 
@@ -78,7 +78,7 @@ void ProfileManager::profilePopup()
         krConfig->deleteGroup(profileType + " - " + profileList[result - REMOVE_ENTRY_ID]);
         profileList.removeAll(profileList[result - REMOVE_ENTRY_ID]);
 
-        KConfigGroup group(krConfig, "Private");
+        KConfigGroup group(krState, "Private");
         group.writeEntry(profileType, profileList);
         krConfig->sync();
     } else if (result >= OVERWRITE_ENTRY_ID && result < OVERWRITE_ENTRY_ID + profileList.count()) {
@@ -98,7 +98,7 @@ void ProfileManager::newProfile(const QString &defaultName)
         QString profileName = profileType + " - " + profileString;
         profileList.append(QString("%1").arg(profileString));
 
-        KConfigGroup group(krConfig, "Private");
+        KConfigGroup group(krState, "Private");
         group.writeEntry(profileType, profileList);
 
         KConfigGroup pg(krConfig, profileName);
@@ -118,7 +118,7 @@ void ProfileManager::deleteProfile(const QString &name)
             krConfig->deleteGroup(profileType + " - " + profileList[i]);
             profileList.removeAll(profileList[i]);
 
-            KConfigGroup pg(krConfig, "Private");
+            KConfigGroup pg(krState, "Private");
             pg.writeEntry(profileType, profileList);
             krConfig->sync();
             return;
@@ -155,7 +155,7 @@ bool ProfileManager::loadProfile(const QString &name)
 
 QStringList ProfileManager::availableProfiles(const QString &profileType)
 {
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     QStringList profiles = group.readEntry(profileType, QStringList());
     QStringList profileNames;
 

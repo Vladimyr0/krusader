@@ -672,7 +672,7 @@ void ListPanel::compareDirs(bool otherPanelToo)
         }
     }
 
-    KConfigGroup pg(krConfig, "Private");
+    KConfigGroup pg(krState, "Private");
     int compareMode = pg.readEntry("Compare Mode", 0);
     KConfigGroup group(krConfig, "Look&Feel");
     bool selectDirs = group.readEntry("Mark Dirs", false);

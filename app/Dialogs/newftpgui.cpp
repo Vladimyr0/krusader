@@ -83,7 +83,7 @@ newFTPGUI::newFTPGUI(QWidget *parent)
     }
 
     // load the history and completion list after creating the history combo
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     QStringList list = group.readEntry("newFTP Completion list", QStringList());
     url->completionObject()->setItems(list);
     list = group.readEntry("newFTP History list", QStringList());

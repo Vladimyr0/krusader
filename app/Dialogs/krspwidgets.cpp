@@ -141,7 +141,7 @@ void newFTPSub::reject()
 newFTPSub::~newFTPSub()
 {
     // Save the history and the completion list of the url comboBox
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     QStringList list = url->completionObject()->items();
     group.writeEntry("newFTP Completion list", list);
     list = url->historyItems();
@@ -157,7 +157,7 @@ KrMaskChoiceSub::KrMaskChoiceSub(QWidget *parent)
     PixmapLabel1->setPixmap(Icon("edit-select").pixmap(32));
     label->setText(i18n("Enter a selection:"));
     // the predefined selections list
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     QStringList lst = group.readEntry("Predefined Selections", QStringList());
     if (lst.size() > 0)
         preSelections->addItems(lst);
@@ -196,7 +196,7 @@ void KrMaskChoiceSub::accept()
         list.append(i->text());
     }
 
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     group.writeEntry("Predefined Selections", list);
     KrMaskChoice::accept();
 }

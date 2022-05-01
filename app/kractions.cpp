@@ -166,7 +166,7 @@ void KrActions::setupActions(Krusader *krusaderApp)
     // KStandardAction::showMenubar( SLOTS, SLOT(showMenubar()), actionCollection(), "std_menubar" );
 
     /* Shortcut disabled because of the Terminal Emulator bug. */
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     int compareMode = group.readEntry("Compare Mode", 0);
     int cmdExecMode = group.readEntry("Command Execution Mode", 0);
     QAction *tmp;

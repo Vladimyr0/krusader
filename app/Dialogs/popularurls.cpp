@@ -66,7 +66,7 @@ void PopularUrls::clearList()
 
 void PopularUrls::save()
 {
-    KConfigGroup svr(krConfig, "Private");
+    KConfigGroup svr(krState, "Private");
     // prepare the string list containing urls and int list with ranks
     QStringList urlList;
     QList<int> rankList;
@@ -82,7 +82,7 @@ void PopularUrls::save()
 
 void PopularUrls::load()
 {
-    KConfigGroup svr(krConfig, "Private");
+    KConfigGroup svr(krState, "Private");
     QStringList urlList = svr.readEntry("PopularUrls", QStringList());
     QList<int> rankList = svr.readEntry("PopularUrlsRank", QList<int>());
     if (urlList.count() != rankList.count()) {

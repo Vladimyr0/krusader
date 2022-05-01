@@ -158,7 +158,7 @@ KrViewer::KrViewer(QWidget *parent)
 
     checkModified();
 
-    KConfigGroup group(krConfig, "KrViewerWindow");
+    KConfigGroup group(krState, "KrViewerWindow");
     int sx = group.readEntry("Window Width", -1);
     int sy = group.readEntry("Window Height", -1);
 
@@ -484,7 +484,7 @@ void KrViewer::tabCloseRequest()
 
 bool KrViewer::queryClose()
 {
-    KConfigGroup group(krConfig, "KrViewerWindow");
+    KConfigGroup group(krState, "KrViewerWindow");
 
     group.writeEntry("Window Width", sizeX);
     group.writeEntry("Window Height", sizeY);

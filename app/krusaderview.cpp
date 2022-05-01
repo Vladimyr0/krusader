@@ -435,7 +435,7 @@ void KrusaderView::profiles(const QString &profileName)
 
 void KrusaderView::loadPanelProfiles(const QString &group)
 {
-    KConfigGroup ldg(krConfig, group);
+    KConfigGroup ldg(krState, group);
     leftMng->loadSettings(KConfigGroup(&ldg, "Left Tabs"));
     rightMng->loadSettings(KConfigGroup(&ldg, "Right Tabs"));
     if (ldg.readEntry("Left Side Is Active", true))
@@ -446,7 +446,7 @@ void KrusaderView::loadPanelProfiles(const QString &group)
 
 void KrusaderView::savePanelProfiles(const QString &group)
 {
-    KConfigGroup svr(krConfig, group);
+    KConfigGroup svr(krState, group);
 
     svr.writeEntry("Vertical Mode", isVertical());
     svr.writeEntry("Left Side Is Active", activePanel()->gui->isLeft());

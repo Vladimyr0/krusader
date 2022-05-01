@@ -30,6 +30,7 @@ class KrPanel;
 class KrGlobal
 {
 public:
+    static KConfig *state;    // allow everyone to access the state
     static KConfig *config; // allow everyone to access the config
     static KMountMan *mountMan; // krusader's Mount Manager
     static KrArcHandler *arcMan; //! Manages archives in several parts of the code
@@ -52,6 +53,7 @@ public:
     static bool isWaylandPlatform; // running on Wayland
 };
 
+#define krState      KrGlobal::state
 #define krConfig KrGlobal::config
 #define krMtMan (*(KrGlobal::mountMan))
 #define krArcMan (*(KrGlobal::arcMan))

@@ -13,6 +13,7 @@
 
 #include <KActionCollection>
 
+KConfig *KrGlobal::state = nullptr;
 KConfig *KrGlobal::config = nullptr;
 KMountMan *KrGlobal::mountMan = nullptr;
 KrArcHandler *KrGlobal::arcMan = nullptr;

@@ -428,7 +428,7 @@ void KrBookmarkHandler::buildMenu(KrBookmark *parent, QMenu *menu, int depth)
     }
 
     if (depth == 0) {
-        KConfigGroup group(krConfig, "Private");
+        KConfigGroup group(krState, "Private");
         bool hasPopularURLs = group.readEntry("BM Popular URLs", true);
         bool hasTrash = group.readEntry("BM Trash", true);
         bool hasLan = group.readEntry("BM Lan", true);
@@ -765,7 +765,7 @@ void KrBookmarkHandler::_resetActionTextAndHighlighting()
 
 void KrBookmarkHandler::rightClickOnSpecialBookmark()
 {
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     bool hasPopularURLs = group.readEntry("BM Popular URLs", true);
     bool hasTrash = group.readEntry("BM Trash", true);
     bool hasLan = group.readEntry("BM Lan", true);

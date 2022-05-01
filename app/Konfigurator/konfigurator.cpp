@@ -60,7 +60,7 @@ Konfigurator::Konfigurator(bool f, int startPage)
 
     createLayout(startPage);
 
-    KConfigGroup group(krConfig, "Konfigurator");
+    KConfigGroup group(krState, "Konfigurator");
     int sx = group.readEntry("Window Width", -1);
     int sy = group.readEntry("Window Height", -1);
 
@@ -86,7 +86,7 @@ void Konfigurator::resizeEvent(QResizeEvent *e)
 
 void Konfigurator::closeDialog()
 {
-    KConfigGroup group(krConfig, "Konfigurator");
+    KConfigGroup group(krState, "Konfigurator");
 
     group.writeEntry("Window Width", sizeX);
     group.writeEntry("Window Height", sizeY);
