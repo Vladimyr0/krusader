@@ -305,9 +305,13 @@ void Krusader::setTray(bool forceCreation)
 
 bool Krusader::versionControl()
 {
-    // create config file
-    krState = KSharedConfig::openConfig().data();
+    // create config files
+    krConfig = KSharedConfig::openConfig().data();
+    KConfigGroup nogroup(krConfig, QString());
+
+    krState = KSharedConfig::openStateConfig().data();
     KConfigGroup nogroup(krState, QString());
+
     const bool firstRun = nogroup.readEntry("First Time", true);
     KrGlobal::sCurrentConfigVersion = nogroup.readEntry("Config Version", -1);
 
