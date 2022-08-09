@@ -16,7 +16,6 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-
 #include <KConfigCore/KSharedConfig>
 #include <KI18n/KLocalizedString>
 
