@@ -35,7 +35,7 @@
 #include "krviewitemdelegate.h"
 #include "listmodel.h"
 
-KrInterDetailedView::KrInterDetailedView(QWidget *parent, KrViewInstance &instance, KConfig *cfg)
+KrInterDetailedView::KrInterDetailedView(QWidget *parent, KrViewInstance &instance, KSharedConfig::Ptr cfg)
     : QTreeView(parent)
     , KrInterView(instance, cfg, this)
     , _autoResizeColumns(true)

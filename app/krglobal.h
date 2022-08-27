@@ -13,6 +13,7 @@
 #include <QKeySequence>
 
 #include <KConfigGroup>
+#include <KSharedConfig>
 
 class KConfig;
 class KMountMan;
@@ -30,8 +31,8 @@ class KrPanel;
 class KrGlobal
 {
 public:
-    static KConfig *state;    // allow everyone to access the state
-    static KConfig *config; // allow everyone to access the config
+    static KSharedConfig::Ptr state; // application state (opened tabs, window geometry, etc.)
+    static KSharedConfig::Ptr config; // application config (preferences specified by user)
     static KMountMan *mountMan; // krusader's Mount Manager
     static KrArcHandler *arcMan; //! Manages archives in several parts of the code
     static KrBookmarkHandler *bookman;

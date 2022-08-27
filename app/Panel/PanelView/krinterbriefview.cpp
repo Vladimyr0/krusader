@@ -40,7 +40,7 @@
 
 #define MAX_BRIEF_COLS 5
 
-KrInterBriefView::KrInterBriefView(QWidget *parent, KrViewInstance &instance, KConfig *cfg)
+KrInterBriefView::KrInterBriefView(QWidget *parent, KrViewInstance &instance, KSharedConfig::Ptr cfg)
     : QAbstractItemView(parent)
     , KrInterView(instance, cfg, this)
     , _header(nullptr)

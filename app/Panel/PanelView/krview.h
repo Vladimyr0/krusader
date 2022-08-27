@@ -21,6 +21,8 @@
 #include <QPixmap>
 #include <utility>
 
+#include <KSharedConfig>
+
 #include "krviewproperties.h"
 
 class KrView;
@@ -462,7 +464,7 @@ public:
     static QString mimeTypeText(FileItem *fileItem);
 
 protected:
-    KrView(KrViewInstance &instance, KConfig *cfg);
+    KrView(KrViewInstance &instance, KSharedConfig::Ptr cfg);
 
     virtual void doRestoreSettings(KConfigGroup grp);
     virtual KIO::filesize_t calcSize() = 0;
@@ -474,7 +476,7 @@ protected:
     }
     bool drawCurrent() const;
 
-    KConfig *_config;
+    KSharedConfig::Ptr _config;
     KrViewProperties *_properties;
     KrViewOperator *_operator;
     bool _focused;

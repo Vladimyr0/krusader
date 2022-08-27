@@ -16,6 +16,8 @@
 // QtWidgets
 #include <QWidget>
 
+#include <KSharedConfig>
+
 class KrView;
 class KConfig;
 
@@ -46,7 +48,7 @@ public:
         return m_shortcut;
     }
 
-    virtual KrView *create(QWidget *w, KConfig *cfg) = 0;
+    virtual KrView *create(QWidget *w, KSharedConfig::Ptr cfg) = 0;
 
 protected:
     KrViewInstance(int id, const QString &name, const QString &desc, const QString &iconName, const QKeySequence &shortcut);
@@ -70,7 +72,7 @@ class KrViewFactory
     friend class KrViewInstance;
 
 public:
-    static KrView *createView(int id, QWidget *widget, KConfig *cfg);
+    static KrView *createView(int id, QWidget *widget, KSharedConfig::Ptr cfg);
     static const QList<KrViewInstance *> &registeredViews()
     {
         return self().m_registeredViews;

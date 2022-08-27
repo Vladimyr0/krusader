@@ -306,25 +306,30 @@ void Krusader::setTray(bool forceCreation)
 bool Krusader::versionControl()
 {
     // create config files
-    krConfig = KSharedConfig::openConfig().data();
-    KConfigGroup nogroup(krConfig, QString());
+    krConfig = KSharedConfig::openConfig();
+    krState = KSharedConfig::openStateConfig();
 
-    krState = KSharedConfig::openStateConfig().data();
-    KConfigGroup nogroup(krState, QString());
+    KConfigGroup configTopLevel(krConfig, QString());
 
-    const bool firstRun = nogroup.readEntry("First Time", true);
-    KrGlobal::sCurrentConfigVersion = nogroup.readEntry("Config Version", -1);
+    KrGlobal::sCurrentConfigVersion = configTopLevel.readEntry("Config Version", -1);
 
-    // first installation of krusader
+    // if Krusader is being started for the first time, display a welcome message and a wizard
+    const bool firstRun = configTopLevel.readEntry("First Time", true);
     if (firstRun) {
         KMessageBox::information(krApp,
                                  i18n("<qt><b>Welcome to Krusader.</b><p>As this is your first run, your machine "
                                       "will now be checked for external applications. Then the Konfigurator will "
                                       "be launched where you can customize Krusader to your needs.</p></qt>"));
     }
-    nogroup.writeEntry("Version", VERSION);
-    nogroup.writeEntry("First Time", false);
+    configTopLevel.writeEntry("First Time", false);
+    krConfig->sync();
+
+    KConfigGroup stateTopLevel(krState, QString());
+    stateTopLevel.writeEntry("Recent App Version", VERSION);
     krState->sync();
+
+    qDebug() << "App config file location:" << krConfig->locationType() << krConfig->name();
+    qDebug() << "App state file location:" << krState->locationType() << krState->name();
 
     QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krusader/"));
 

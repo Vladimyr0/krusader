@@ -16,6 +16,8 @@
 // QtWidgets
 #include <QTreeView>
 
+#include <KSharedConfig>
+
 #include "krinterview.h"
 
 class QMouseEvent;
@@ -27,7 +29,7 @@ class KrInterDetailedView : public QTreeView, public KrInterView
     Q_OBJECT
 
 public:
-    KrInterDetailedView(QWidget *parent, KrViewInstance &instance, KConfig *cfg);
+    KrInterDetailedView(QWidget *parent, KrViewInstance &instance, KSharedConfig::Ptr cfg);
     ~KrInterDetailedView() override;
 
     void updateView() override;
