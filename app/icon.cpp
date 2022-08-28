@@ -32,7 +32,7 @@ static inline QStringList getThemeFallbackList()
 
     // add user fallback theme if set
     if (krConfig) {
-        const KConfigGroup group(krState, QStringLiteral("Startup"));
+        const KConfigGroup group(krConfig, QStringLiteral("Startup"));
         QString userFallbackTheme = group.readEntry("Fallback Icon Theme", QString());
         if (!userFallbackTheme.isEmpty()) {
             themes << userFallbackTheme;

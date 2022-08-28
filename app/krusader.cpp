@@ -157,7 +157,7 @@ Krusader::Krusader(const QCommandLineParser &parser)
     const KConfigGroup lookFeelGroup(krConfig, "Look&Feel");
     FileItem::loadUserDefinedFolderIcons(lookFeelGroup.readEntry("Load User Defined Folder Icons", _UserDefinedFolderIcons));
 
-    const KConfigGroup startupGroup(krState, "Startup");
+    const KConfigGroup startupGroup(krConfig, "Startup");
     QString startProfile = startupGroup.readEntry("Starter Profile Name", QString());
 
     QList<QUrl> leftTabs;
@@ -414,7 +414,7 @@ void Krusader::saveSettings()
     cfg.writeEntry("State", saveState());
 
     // save panel and window settings
-    if (cfg.readEntry("Remember Position", _RememberPos))
+    if (krConfig->group("Startup").readEntry("Remember Position", _RememberPos))
         savePosition();
 
     // save the gui components visibility
