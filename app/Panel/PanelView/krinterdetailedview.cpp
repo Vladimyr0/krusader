@@ -117,7 +117,7 @@ void KrInterDetailedView::doRestoreSettings(KConfigGroup grp)
         headerView->restoreState(savedState);
 
         // do not show new columns by default; restoreState() shows columns not saved
-        if (KrGlobal::sCurrentConfigVersion < KrGlobal::sConfigVersion) {
+        if (KrGlobal::sCurrentConfigVersion < 1) {
             hideColumn(KrViewProperties::Changed);
             hideColumn(KrViewProperties::Accessed);
         }
