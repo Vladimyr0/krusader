@@ -102,21 +102,26 @@ Krusader::Krusader(const QCommandLineParser &parser)
     QString message;
     switch (krConfig->accessMode()) {
     case KConfigBase::NoAccess:
-        message = "Krusader's configuration file can't be found. Default values will be used.";
+        message = i18n("Krusader configuration file can't be accessed. Default values will be used.");
         break;
     case KConfigBase::ReadOnly:
-        message = "Krusader's configuration file is in READ ONLY mode (why is that!?) Changed values will not be saved";
+        message = i18n("Krusader configuration file is in Read Only mode. Changes will not be saved.");
         break;
     case KConfigBase::ReadWrite:
         message = "";
         break;
     }
+    if (!message.isEmpty()) {
+        KMessageBox::error(krApp, message);
+    }
+
+    message = "";
     switch (krState->accessMode()) {
     case KConfigBase::NoAccess :
-        message = "Krusader's state file can't be found. Default values will be used.";
+        message = i18n("Krusader state file can't be accessed. Default values will be used.");
         break;
     case KConfigBase::ReadOnly :
-        message = "Krusader's state file is in READ ONLY mode (why is that!?) Changed values will not be saved";
+        message = i18n("Krusader state file is in Read Only mode. Changes will not be saved.");
         break;
     case KConfigBase::ReadWrite :
         message = "";
