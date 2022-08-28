@@ -328,6 +328,16 @@ bool Krusader::versionControl()
     stateTopLevel.writeEntry("Recent App Version", VERSION);
     krState->sync();
 
+    // check for Config Version mismatch between Config and State files
+    // that should never happen unless the files are tinkered with
+    int stateConfigVersion = stateTopLevel.readEntry("Config Version", -1);
+    if (stateConfigVersion >= 0 && KrGlobal::sCurrentConfigVersion != stateConfigVersion) {
+        KMessageBox::error(this, i18n("Config and State format version mismatch. "
+                                      "Before closing Krusader please copy files ~/.config/krusaderrc "
+                                      "and ~/.local/share/krusader/krusaderstaterc to another location."
+                                      "Please attach these files to a bug report at bugs.kde.org."));
+    }
+
     qDebug() << "App config file location:" << krConfig->locationType() << krConfig->name();
     qDebug() << "App state file location:" << krState->locationType() << krState->name();
 
@@ -403,8 +413,9 @@ void Krusader::saveSettings()
         MAIN_VIEW->setTerminalEmulator(false, true);
     }
 
-    KConfigGroup noGroup(krState, QString());
-    noGroup.writeEntry("Config Version", KrGlobal::sConfigVersion);
+    // by this time all the config conversions should be complete
+    krConfig->group(QString()).writeEntry("Config Version", KrGlobal::sConfigVersion);
+    krState->group(QString()).writeEntry("Config Version", KrGlobal::sConfigVersion);
 
     KConfigGroup cfg(krState, "Main Toolbar");
     toolBar()->saveSettings(cfg);
