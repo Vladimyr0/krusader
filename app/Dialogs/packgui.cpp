@@ -73,7 +73,7 @@ PackGUI::PackGUI(const QString &defaultName, const QString &defaultPath, int noO
     if (PS("7z"))
         typeData->addItem("7z");
     // set the last used packer as the top one
-    QString tmp = group.readEntry("lastUsedPacker", QString());
+    QString tmp = krState->group("Archives").readEntry("lastUsedPacker", QString());
     if (!tmp.isEmpty()) {
         for (int i = 0; i < typeData->count(); ++i)
             if (typeData->itemText(i) == tmp) {
@@ -112,11 +112,11 @@ void PackGUI::accept()
     destination = dirData->text();
     type = typeData->currentText();
     // write down the packer chosen, to be lastUsedPacker
-    KConfigGroup group(krConfig, "Archives");
+    KConfigGroup group(krState, "Archives");
     group.writeEntry("lastUsedPacker", type);
 
     group.writeEntry("Command Line Switches", commandLineSwitches->historyItems());
-    krConfig->sync();
+    krState->sync();
     PackGUIBase::accept();
 }
 
@@ -127,7 +127,7 @@ void PackGUI::reject()
     type.clear();
     // If e.g. the user has deleted a command line switch from the list, that's
     // taken into account even if a file is not packed afterwards
-    KConfigGroup group(krConfig, "Archives");
+    KConfigGroup group(krState, "Archives");
     group.writeEntry("Command Line Switches", commandLineSwitches->historyItems());
 
     PackGUIBase::reject();

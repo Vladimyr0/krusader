@@ -263,7 +263,7 @@ PackGUIBase::PackGUIBase(QWidget *parent)
     commandLineSwitches->setDuplicatesEnabled(false);
     commandLineSwitches->setMinimumContentsLength(10);
 
-    QStringList list = group.readEntry("Command Line Switches", QStringList());
+    QStringList list = krState->group("Archives").readEntry("Command Line Switches", QStringList());
     commandLineSwitches->setHistoryItems(list);
 
     hbox_7->addWidget(commandLineSwitches);
