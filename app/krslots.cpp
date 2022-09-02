@@ -672,7 +672,7 @@ void KrSlots::execTypeSetup()
                 // if commands are to be executed in the TE, it must be loaded
                 MAIN_VIEW->terminalDock()->initialise();
             }
-            KConfigGroup grp(krConfig, "Private");
+            KConfigGroup grp(krState, "Private");
             grp.writeEntry("Command Execution Mode", i);
             break;
         }
