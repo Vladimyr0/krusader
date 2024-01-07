@@ -12,11 +12,11 @@ KrViewProperties::KrViewProperties(bool displayIcons, bool numericPermissions,
                                    KrViewProperties::SortOptions sortOptions,
                                    KrViewProperties::SortMethod sortMethod, bool humanReadableSize,
                                    bool localeAwareCompareIsCaseSensitive,
-                                   QStringList atomicExtensions)
+                                   QStringList atomicExtensions, bool useViNavigation)
     : numericPermissions(numericPermissions), displayIcons(displayIcons), sortColumn(Name),
       sortOptions(sortOptions), sortMethod(sortMethod), filter(KrViewProperties::All),
       filterMask(KrQuery("*")), filterApplysToDirs(false),
       localeAwareCompareIsCaseSensitive(localeAwareCompareIsCaseSensitive),
-      humanReadableSize(humanReadableSize), atomicExtensions(std::move(atomicExtensions)), numberOfColumns(1)
+      humanReadableSize(humanReadableSize), atomicExtensions(std::move(atomicExtensions)), numberOfColumns(1), useViNavigation(useViNavigation)
 {
 }

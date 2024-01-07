@@ -71,7 +71,7 @@ public:
 
     KrViewProperties(bool displayIcons, bool numericPermissions, SortOptions sortOptions,
                      SortMethod sortMethod, bool humanReadableSize,
-                     bool localeAwareCompareIsCaseSensitive, QStringList atomicExtensions);
+                     bool localeAwareCompareIsCaseSensitive, QStringList atomicExtensions, bool useViNavigation);
 
     const bool numericPermissions; // show full permission column as octal numbers
     const bool displayIcons;             // true if icons should be displayed in this view
@@ -91,6 +91,7 @@ public:
     // list of strings, which will be treated as one extension. Must start with a dot.
     const QStringList atomicExtensions;
     int numberOfColumns;                          // the number of columns in the brief view
+    bool useViNavigation;                         // true if vi-like navigation is enabled
 };
 
 #endif // KRVIEWPROPERTIES_H

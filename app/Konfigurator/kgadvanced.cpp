@@ -32,10 +32,11 @@ KgAdvanced::KgAdvanced(bool first, QWidget* parent) :
     KONFIGURATOR_CHECKBOX_PARAM generalSettings[] =
         //   cfg_class  cfg_name             default              text                                                        restart tooltip
     {
-        {"Advanced", "AutoMount",          _AutoMount,          i18n("Automount filesystems"),                            false,  i18n("When stepping into a folder which is defined as a mount point in the <b>fstab</b>, try mounting it with the defined parameters.")}
+        {"Advanced", "AutoMount",          _AutoMount,          i18n("Automount filesystems"),                            false,  i18n("When stepping into a folder which is defined as a mount point in the <b>fstab</b>, try mounting it with the defined parameters.")},
+        {"Look&Feel", "Vi Mode",            _ViNavigation,       i18n("Vi Mode"),                                         false,  i18n("Vi-like navigation.") },
     };
 
-    KonfiguratorCheckBoxGroup *generals = createCheckBoxGroup(1, 0, generalSettings, 1, generalGrp);
+    KonfiguratorCheckBoxGroup *generals = createCheckBoxGroup(1, 0, generalSettings, 2, generalGrp);
 
     generalGrid->addWidget(generals, 1, 0);
 
