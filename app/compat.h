@@ -9,14 +9,14 @@
 
 #include <kio_version.h>
 
-#if __has_include(<KCompletion/kcompletion_version.h>)
-#include <KCompletion/kcompletion_version.h>
+#if __has_include(<kcompletion_version.h>)
+#include <kcompletion_version.h>
 #else // Pre KF-5.91 header layout
 #include <kcompletion_version.h>
 #endif
 
-#if __has_include(<KArchive/karchive_version.h>)
-#include <KArchive/karchive_version.h>
+#if __has_include(<karchive_version.h>)
+#include <karchive_version.h>
 #else // Pre KF-5.91 header layout
 #include <karchive_version.h>
 #endif
