@@ -95,6 +95,7 @@ private:
     void removePart(KParts::ReadOnlyPart *part);
     bool isPartAdded(KParts::Part *part);
 
+    static void activateWindow(QWidget *window);
     static KrViewer *getViewer(bool new_window);
     static QString makeTabText(PanelViewerBase *pvb);
     static QString makeTabToolTip(PanelViewerBase *pvb);
@@ -121,6 +122,8 @@ private:
 
     int sizeX;
     int sizeY;
+    static bool m_isX11;
+    static bool m_isWayland;
 };
 
 class Invoker : public QObject

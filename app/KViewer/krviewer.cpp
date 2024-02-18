@@ -19,7 +19,9 @@
 // QtWidgets
 #include <QMenuBar>
 #include <QStatusBar>
+#include <QGuiApplication>
 
+#include <kwindowsystem.h>
 #include <KConfigCore/KSharedConfig>
 #include <KConfigWidgets/KStandardAction>
 #include <KCoreAddons/KProcess>
@@ -51,6 +53,9 @@ NOTE: Currently the code expects PanelViewer::openUrl() to be called only once
 */
 
 QList<KrViewer *> KrViewer::viewers;
+bool KrViewer::m_isWayland = false;
+bool KrViewer::m_isX11 = true;
+
 
 KrViewer::KrViewer(QWidget *parent)
     : KParts::MainWindow(parent, Qt::WindowFlags())
@@ -62,6 +67,8 @@ KrViewer::KrViewer(QWidget *parent)
     // setWFlags(Qt::WType_TopLevel | WDestructiveClose);
     setXMLFile("krviewer.rc"); // kpart-related xml file
     setHelpMenuEnabled(false);
+    m_isX11 = KWindowSystem::isPlatformX11();
+    m_isWayland = KWindowSystem::isPlatformWayland();
 
     connect(&manager, &KParts::PartManager::activePartChanged, this, &KrViewer::createGUI);
     connect(&tabWidget, &QTabWidget::currentChanged, this, &KrViewer::tabChanged);
@@ -267,6 +274,31 @@ bool KrViewer::eventFilter(QObject * /* watched */, QEvent *e)
     return false;
 }
 
+
+void KrViewer::activateWindow(QWidget *window)
+{
+    auto focusWindow = qGuiApp->focusWindow();
+    if (focusWindow && m_isWayland) {
+            const int launchedSerial = KWindowSystem::lastInputSerial(focusWindow);
+            auto conn = std::make_shared<QMetaObject::Connection>();
+            *conn = connect(
+                KWindowSystem::self(),
+                &KWindowSystem::xdgActivationTokenArrived,
+                window,
+                [window, launchedSerial, conn](int tokenSerial, const QString &token) {
+                    if (tokenSerial == launchedSerial) {
+                        disconnect(*conn);
+                        KWindowSystem::setCurrentXdgActivationToken(token);
+                        // activateWindow will only work if a new token from the focused window has been set otherwise it will only request attn
+                        KWindowSystem::activateWindow(window->windowHandle());
+                    }
+                });
+            KWindowSystem::requestXdgActivationToken(focusWindow, launchedSerial, {});
+    }
+    if (m_isX11) {
+        KWindowSystem::forceActiveWindow(window->winId());
+    }
+}
 KrViewer *KrViewer::getViewer(bool new_window)
 {
     if (!new_window) {
@@ -278,7 +310,7 @@ KrViewer *KrViewer::getViewer(bool new_window)
                 viewers.first()->show();
             }
             viewers.first()->raise();
-            viewers.first()->activateWindow();
+            activateWindow(viewers.first());
         }
         return viewers.first();
     } else {
@@ -425,10 +457,11 @@ void KrViewer::tabCloseRequest(int index, bool force)
     if (tabWidget.count() <= 0) {
         if (returnFocusToThisWidget) {
             returnFocusToThisWidget->raise();
-            returnFocusToThisWidget->activateWindow();
+            activateWindow(returnFocusToThisWidget);
+
         } else {
             krMainWindow->raise();
-            krMainWindow->activateWindow();
+            activateWindow(krMainWindow);
         }
 
         QTimer::singleShot(0, this, &KrViewer::close);
