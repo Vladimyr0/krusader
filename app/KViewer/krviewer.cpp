@@ -279,21 +279,20 @@ void KrViewer::activateWindow(QWidget *window)
 {
     auto focusWindow = qGuiApp->focusWindow();
     if (focusWindow && m_isWayland) {
-            const int launchedSerial = KWindowSystem::lastInputSerial(focusWindow);
-            auto conn = std::make_shared<QMetaObject::Connection>();
-            *conn = connect(
-                KWindowSystem::self(),
-                &KWindowSystem::xdgActivationTokenArrived,
-                window,
-                [window, launchedSerial, conn](int tokenSerial, const QString &token) {
-                    if (tokenSerial == launchedSerial) {
-                        disconnect(*conn);
-                        KWindowSystem::setCurrentXdgActivationToken(token);
-                        // activateWindow will only work if a new token from the focused window has been set otherwise it will only request attn
-                        KWindowSystem::activateWindow(window->windowHandle());
-                    }
-                });
-            KWindowSystem::requestXdgActivationToken(focusWindow, launchedSerial, {});
+        const int launchedSerial = KWindowSystem::lastInputSerial(focusWindow);
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(KWindowSystem::self(),
+                        &KWindowSystem::xdgActivationTokenArrived,
+                        window,
+                        [window, launchedSerial, conn](int tokenSerial, const QString &token) {
+                            if (tokenSerial == launchedSerial) {
+                                disconnect(*conn);
+                                KWindowSystem::setCurrentXdgActivationToken(token);
+                                // activateWindow will only work if a new token from the focused window has been set otherwise it will only request attn
+                                KWindowSystem::activateWindow(window->windowHandle());
+                            }
+                        });
+        KWindowSystem::requestXdgActivationToken(focusWindow, launchedSerial, {});
     }
     if (m_isX11) {
         KWindowSystem::forceActiveWindow(window->winId());
