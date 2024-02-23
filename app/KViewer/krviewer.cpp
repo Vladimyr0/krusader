@@ -21,7 +21,6 @@
 #include <QStatusBar>
 #include <QGuiApplication>
 
-#include <kwindowsystem.h>
 #include <KConfigCore/KSharedConfig>
 #include <KConfigWidgets/KStandardAction>
 #include <KCoreAddons/KProcess>
@@ -30,6 +29,7 @@
 #include <KIOCore/KFileItem>
 #include <KParts/Part>
 #include <KWidgetsAddons/KMessageBox>
+#include <KWindowSystem>
 #include <KXmlGui/KActionCollection>
 #include <KXmlGui/KShortcutsDialog>
 #include <KXmlGui/KToolBar>
@@ -53,9 +53,6 @@ NOTE: Currently the code expects PanelViewer::openUrl() to be called only once
 */
 
 QList<KrViewer *> KrViewer::viewers;
-bool KrViewer::m_isWayland = false;
-bool KrViewer::m_isX11 = true;
-
 
 KrViewer::KrViewer(QWidget *parent)
     : KParts::MainWindow(parent, Qt::WindowFlags())
@@ -67,8 +64,6 @@ KrViewer::KrViewer(QWidget *parent)
     // setWFlags(Qt::WType_TopLevel | WDestructiveClose);
     setXMLFile("krviewer.rc"); // kpart-related xml file
     setHelpMenuEnabled(false);
-    m_isX11 = KWindowSystem::isPlatformX11();
-    m_isWayland = KWindowSystem::isPlatformWayland();
 
     connect(&manager, &KParts::PartManager::activePartChanged, this, &KrViewer::createGUI);
     connect(&tabWidget, &QTabWidget::currentChanged, this, &KrViewer::tabChanged);
@@ -278,7 +273,7 @@ bool KrViewer::eventFilter(QObject * /* watched */, QEvent *e)
 void KrViewer::activateWindow(QWidget *window)
 {
     auto focusWindow = qGuiApp->focusWindow();
-    if (focusWindow && m_isWayland) {
+    if (focusWindow && KrGlobal::isWayland) {
         const int launchedSerial = KWindowSystem::lastInputSerial(focusWindow);
         auto conn = std::make_shared<QMetaObject::Connection>();
         *conn = connect(KWindowSystem::self(),
@@ -294,7 +289,7 @@ void KrViewer::activateWindow(QWidget *window)
                         });
         KWindowSystem::requestXdgActivationToken(focusWindow, launchedSerial, {});
     }
-    if (m_isX11) {
+    if (KrGlobal::isX11) {
         KWindowSystem::forceActiveWindow(window->winId());
     }
 }

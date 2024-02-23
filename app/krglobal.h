@@ -41,6 +41,11 @@ public:
     static JobMan *jobMan;
     static KrPanel *activePanel();
 
+    // Stores whether the platform is Wayland or not
+    static bool isWayland;
+    // Stores whether the platform is X11 or not
+    static bool isX11;
+
     // HACK - used by [ListerTextArea|KrSearchDialog|LocateDlg]:keyPressEvent()
     static QKeySequence copyShortcut;
 

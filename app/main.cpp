@@ -29,8 +29,9 @@
 #include <KConfigCore/KSharedConfig>
 #include <KCoreAddons/KAboutData>
 #include <KI18n/KLocalizedString>
+#include <KStartupInfo>
 #include <KWidgetsAddons/KActionMenu>
-#include <KWindowSystem/KStartupInfo>
+#include <KWindowSystem>
 
 #include "../Archive/krarchandler.h"
 
@@ -80,6 +81,9 @@ int main(int argc, char *argv[])
 {
     // set global log message format
     qSetMessagePattern(KrServices::GLOBAL_MESSAGE_PATTERN);
+
+    KrGlobal::isX11 = KWindowSystem::isPlatformX11();
+    KrGlobal::isWayland = KWindowSystem::isPlatformWayland();
 
     // enable high dpi support
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);

@@ -28,6 +28,9 @@ QKeySequence KrGlobal::copyShortcut;
 const int KrGlobal::sConfigVersion;
 int KrGlobal::sCurrentConfigVersion;
 
+bool KrGlobal::isWayland = false;
+bool KrGlobal::isX11 = true;
+
 KrPanel *KrGlobal::activePanel()
 {
     return mainView->activePanel();
