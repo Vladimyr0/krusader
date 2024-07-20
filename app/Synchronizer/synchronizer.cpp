@@ -650,9 +650,12 @@ SynchronizerFileItem *Synchronizer::addDuplicateItem(SynchronizerFileItem *paren
             }
         }
 
-        if (ignoreDate)
-            task = TT_DIFFERS;
-        else if (asymmetric) {
+        if (ignoreDate) {
+            if (asymmetric)
+                task = TT_COPY_TO_LEFT;
+            else
+                task = TT_DIFFERS;
+        } else if (asymmetric) {
             // To avoid that the default action is
             // to overwrite a file by an old version of it
             if (leftDate > checkedRightDate)
