@@ -476,22 +476,21 @@ SynchronizerFileItem * Synchronizer::addDuplicateItem(SynchronizerFileItem *pare
             }
         }
 
-        if (ignoreDate)
-            task = TT_DIFFERS;
-        else if (asymmetric) {
+        if (asymmetric) {
             // To avoid that the default action is
             // to overwrite a file by an old version of it
-            if (leftDate > checkedRightDate)
+            if (!ignoreDate && leftDate > checkedRightDate)
                 task = TT_DIFFERS;
             else
                 task = TT_COPY_TO_LEFT;
-        } else if (leftDate > checkedRightDate)
+        } else if (ignoreDate)
+            task = TT_DIFFERS;
+        else if (leftDate > checkedRightDate)
             task = TT_COPY_TO_RIGHT;
         else if (leftDate < checkedRightDate)
             task = TT_COPY_TO_LEFT;
         else
             task = TT_DIFFERS;
-
     } while (false);
 
     SynchronizerFileItem * item = addItem(parent, leftName, rightName, leftDir, rightDir, true, true,
