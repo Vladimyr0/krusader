@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-16 03:15+0000\n"
+"POT-Creation-Date: 2024-09-15 03:22+0000\n"
 "PO-Revision-Date: 2013-06-18 10:18-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -5284,7 +5284,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: app/krslots.cpp:137 app/krslots.cpp:223 app/krslots.cpp:407
-#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1382
+#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1381
 #, fuzzy, kde-format
 #| msgid "Error saving file %1"
 msgid "Error executing %1."
@@ -8109,8 +8109,8 @@ msgid ""
 msgstr ""
 
 #: app/Splitter/combiner.cpp:177 app/Splitter/splitter.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1110
-#: app/Synchronizer/synchronizer.cpp:1118
+#: app/Synchronizer/synchronizer.cpp:1109
+#: app/Synchronizer/synchronizer.cpp:1117
 #, fuzzy, kde-format
 msgid "File Already Exists"
 msgstr "ਫਾਇਲ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ"
@@ -8360,19 +8360,19 @@ msgid "&Close"
 msgstr "ਬੰਦ ਕਰੋ(&C)"
 
 #: app/Synchronizer/synchronizedialog.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1288
-#: app/Synchronizer/synchronizer.cpp:1301
+#: app/Synchronizer/synchronizer.cpp:1287
+#: app/Synchronizer/synchronizer.cpp:1300
 #, fuzzy, kde-format
 msgid "Pause"
 msgstr "ਵਿਰਾਮ"
 
 #: app/Synchronizer/synchronizedialog.cpp:188
-#: app/Synchronizer/synchronizer.cpp:1303
+#: app/Synchronizer/synchronizer.cpp:1302
 #, fuzzy, kde-format
 msgid "Resume"
 msgstr "ਮੁਡ਼ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:635
+#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:634
 #, fuzzy, kde-format
 msgid "Number of files: %1"
 msgstr "ਫਾਇਲਾਂ ਦੀ ਗਿਣਤੀ:"
@@ -8382,24 +8382,24 @@ msgstr "ਫਾਇਲਾਂ ਦੀ ਗਿਣਤੀ:"
 msgid "Number of compared folders: %1"
 msgstr "ਫਾਇਲਾਂ ਦੀ ਗਿਣਤੀ:"
 
-#: app/Synchronizer/synchronizer.cpp:1159
-#: app/Synchronizer/synchronizer.cpp:1164
+#: app/Synchronizer/synchronizer.cpp:1158
+#: app/Synchronizer/synchronizer.cpp:1163
 #, fuzzy, kde-format
 msgid "Error at copying file %1 to %2."
 msgstr "ਫਾਇਲ ਲਿਖਣ ਲਈ ਗਲਤੀ"
 
-#: app/Synchronizer/synchronizer.cpp:1169
+#: app/Synchronizer/synchronizer.cpp:1168
 #, fuzzy, kde-format
 #| msgid "Error saving file %1"
 msgid "Error at deleting file %1."
 msgstr "%1 ਫਾਇਲ ਸੰਭਾਲਣ ਦੌਰਾਨ ਗਲਤੀ"
 
-#: app/Synchronizer/synchronizer.cpp:1336
+#: app/Synchronizer/synchronizer.cpp:1335
 #, kde-format
 msgid "Krusader::Synchronizer"
 msgstr ""
 
-#: app/Synchronizer/synchronizer.cpp:1337
+#: app/Synchronizer/synchronizer.cpp:1336
 #, kde-format
 msgid "Feeding the URLs to KGet"
 msgstr ""

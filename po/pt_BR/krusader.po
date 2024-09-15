@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krusader\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-16 03:15+0000\n"
+"POT-Creation-Date: 2024-09-15 03:22+0000\n"
 "PO-Revision-Date: 2023-07-05 17:45-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -5501,7 +5501,7 @@ msgstr[0] "Enviando arquivo: %2"
 msgstr[1] "Enviando arquivos: %2"
 
 #: app/krslots.cpp:137 app/krslots.cpp:223 app/krslots.cpp:407
-#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1382
+#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1381
 #, kde-format
 msgid "Error executing %1."
 msgstr "Erro executando %1."
@@ -8356,8 +8356,8 @@ msgstr ""
 "Continuar combinando?"
 
 #: app/Splitter/combiner.cpp:177 app/Splitter/splitter.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1110
-#: app/Synchronizer/synchronizer.cpp:1118
+#: app/Synchronizer/synchronizer.cpp:1109
+#: app/Synchronizer/synchronizer.cpp:1117
 #, kde-format
 msgid "File Already Exists"
 msgstr "O arquivo já existe"
@@ -8605,19 +8605,19 @@ msgid "&Close"
 msgstr "Fe&char"
 
 #: app/Synchronizer/synchronizedialog.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1288
-#: app/Synchronizer/synchronizer.cpp:1301
+#: app/Synchronizer/synchronizer.cpp:1287
+#: app/Synchronizer/synchronizer.cpp:1300
 #, kde-format
 msgid "Pause"
 msgstr "Pausa"
 
 #: app/Synchronizer/synchronizedialog.cpp:188
-#: app/Synchronizer/synchronizer.cpp:1303
+#: app/Synchronizer/synchronizer.cpp:1302
 #, kde-format
 msgid "Resume"
 msgstr "Continuar"
 
-#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:635
+#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:634
 #, kde-format
 msgid "Number of files: %1"
 msgstr "Número de arquivos: %1"
@@ -8627,23 +8627,23 @@ msgstr "Número de arquivos: %1"
 msgid "Number of compared folders: %1"
 msgstr "Número de pastas comparadas: %1"
 
-#: app/Synchronizer/synchronizer.cpp:1159
-#: app/Synchronizer/synchronizer.cpp:1164
+#: app/Synchronizer/synchronizer.cpp:1158
+#: app/Synchronizer/synchronizer.cpp:1163
 #, kde-format
 msgid "Error at copying file %1 to %2."
 msgstr "Erro ao copiar arquivo %1 para %2."
 
-#: app/Synchronizer/synchronizer.cpp:1169
+#: app/Synchronizer/synchronizer.cpp:1168
 #, kde-format
 msgid "Error at deleting file %1."
 msgstr "Erro ao excluir o arquivo %1."
 
-#: app/Synchronizer/synchronizer.cpp:1336
+#: app/Synchronizer/synchronizer.cpp:1335
 #, kde-format
 msgid "Krusader::Synchronizer"
 msgstr "Krusader::Sincronizador"
 
-#: app/Synchronizer/synchronizer.cpp:1337
+#: app/Synchronizer/synchronizer.cpp:1336
 #, kde-format
 msgid "Feeding the URLs to KGet"
 msgstr "Passando as URLs ao KGet"

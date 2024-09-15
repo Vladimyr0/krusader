@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krusader\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-16 03:15+0000\n"
+"POT-Creation-Date: 2024-09-15 03:22+0000\n"
 "PO-Revision-Date: 2024-01-29 19:57+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -5523,7 +5523,7 @@ msgstr[0] "S'està enviant el fitxer: %2"
 msgstr[1] "S'estan enviant els fitxers: %2"
 
 #: app/krslots.cpp:137 app/krslots.cpp:223 app/krslots.cpp:407
-#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1382
+#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1381
 #, kde-format
 msgid "Error executing %1."
 msgstr "S'ha produït un error quan s'executava %1."
@@ -8377,8 +8377,8 @@ msgstr ""
 "continuar?"
 
 #: app/Splitter/combiner.cpp:177 app/Splitter/splitter.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1110
-#: app/Synchronizer/synchronizer.cpp:1118
+#: app/Synchronizer/synchronizer.cpp:1109
+#: app/Synchronizer/synchronizer.cpp:1117
 #, kde-format
 msgid "File Already Exists"
 msgstr "El fitxer ja existeix"
@@ -8627,19 +8627,19 @@ msgid "&Close"
 msgstr "&Tanca"
 
 #: app/Synchronizer/synchronizedialog.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1288
-#: app/Synchronizer/synchronizer.cpp:1301
+#: app/Synchronizer/synchronizer.cpp:1287
+#: app/Synchronizer/synchronizer.cpp:1300
 #, kde-format
 msgid "Pause"
 msgstr "Pausa"
 
 #: app/Synchronizer/synchronizedialog.cpp:188
-#: app/Synchronizer/synchronizer.cpp:1303
+#: app/Synchronizer/synchronizer.cpp:1302
 #, kde-format
 msgid "Resume"
 msgstr "Continua"
 
-#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:635
+#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:634
 #, kde-format
 msgid "Number of files: %1"
 msgstr "Nombre de fitxers: %1"
@@ -8649,23 +8649,23 @@ msgstr "Nombre de fitxers: %1"
 msgid "Number of compared folders: %1"
 msgstr "Nombre de carpetes comparades: %1"
 
-#: app/Synchronizer/synchronizer.cpp:1159
-#: app/Synchronizer/synchronizer.cpp:1164
+#: app/Synchronizer/synchronizer.cpp:1158
+#: app/Synchronizer/synchronizer.cpp:1163
 #, kde-format
 msgid "Error at copying file %1 to %2."
 msgstr "Error en copiar el fitxer %1 a %2."
 
-#: app/Synchronizer/synchronizer.cpp:1169
+#: app/Synchronizer/synchronizer.cpp:1168
 #, kde-format
 msgid "Error at deleting file %1."
 msgstr "Error en suprimir el fitxer %1."
 
-#: app/Synchronizer/synchronizer.cpp:1336
+#: app/Synchronizer/synchronizer.cpp:1335
 #, kde-format
 msgid "Krusader::Synchronizer"
 msgstr "Krusader::Sincronitzador"
 
-#: app/Synchronizer/synchronizer.cpp:1337
+#: app/Synchronizer/synchronizer.cpp:1336
 #, kde-format
 msgid "Feeding the URLs to KGet"
 msgstr "S'estan transmetent els URL al KGet"

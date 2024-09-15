@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krusader\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-16 03:15+0000\n"
+"POT-Creation-Date: 2024-09-15 03:22+0000\n"
 "PO-Revision-Date: 2023-07-23 23:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -5433,7 +5433,7 @@ msgid_plural "Sending files: %2"
 msgstr[0] "파일 보내기: %2"
 
 #: app/krslots.cpp:137 app/krslots.cpp:223 app/krslots.cpp:407
-#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1382
+#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1381
 #, kde-format
 msgid "Error executing %1."
 msgstr "%1을(를) 실행하는 중 오류가 발생했습니다."
@@ -8252,8 +8252,8 @@ msgstr ""
 " 올바른 CRC 파일이 없으면 유효성을 검사할 수 없습니다. 계속 합치시겠습니까?"
 
 #: app/Splitter/combiner.cpp:177 app/Splitter/splitter.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1110
-#: app/Synchronizer/synchronizer.cpp:1118
+#: app/Synchronizer/synchronizer.cpp:1109
+#: app/Synchronizer/synchronizer.cpp:1117
 #, kde-format
 msgid "File Already Exists"
 msgstr "파일이 이미 존재함"
@@ -8496,19 +8496,19 @@ msgid "&Close"
 msgstr "닫기(&C)"
 
 #: app/Synchronizer/synchronizedialog.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1288
-#: app/Synchronizer/synchronizer.cpp:1301
+#: app/Synchronizer/synchronizer.cpp:1287
+#: app/Synchronizer/synchronizer.cpp:1300
 #, kde-format
 msgid "Pause"
 msgstr "일시 정지"
 
 #: app/Synchronizer/synchronizedialog.cpp:188
-#: app/Synchronizer/synchronizer.cpp:1303
+#: app/Synchronizer/synchronizer.cpp:1302
 #, kde-format
 msgid "Resume"
 msgstr "다시 시작"
 
-#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:635
+#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:634
 #, kde-format
 msgid "Number of files: %1"
 msgstr "파일 개수: %1"
@@ -8518,23 +8518,23 @@ msgstr "파일 개수: %1"
 msgid "Number of compared folders: %1"
 msgstr "비교할 폴더 개수: %1"
 
-#: app/Synchronizer/synchronizer.cpp:1159
-#: app/Synchronizer/synchronizer.cpp:1164
+#: app/Synchronizer/synchronizer.cpp:1158
+#: app/Synchronizer/synchronizer.cpp:1163
 #, kde-format
 msgid "Error at copying file %1 to %2."
 msgstr "파일 %1을(를) %2(으)로 복사하는 중 오류가 발생했습니다."
 
-#: app/Synchronizer/synchronizer.cpp:1169
+#: app/Synchronizer/synchronizer.cpp:1168
 #, kde-format
 msgid "Error at deleting file %1."
 msgstr "파일 %1을(를) 지우는 중 오류가 발생했습니다."
 
-#: app/Synchronizer/synchronizer.cpp:1336
+#: app/Synchronizer/synchronizer.cpp:1335
 #, kde-format
 msgid "Krusader::Synchronizer"
 msgstr "Krusader::동기화 도구"
 
-#: app/Synchronizer/synchronizer.cpp:1337
+#: app/Synchronizer/synchronizer.cpp:1336
 #, kde-format
 msgid "Feeding the URLs to KGet"
 msgstr "KGet에 URL을 입력하는 중"

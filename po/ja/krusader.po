@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krusader\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-16 03:15+0000\n"
+"POT-Creation-Date: 2024-09-15 03:22+0000\n"
 "PO-Revision-Date: 2012-10-09 23:46-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -5429,7 +5429,7 @@ msgid_plural "Sending files: %2"
 msgstr[0] "Sending file: "
 
 #: app/krslots.cpp:137 app/krslots.cpp:223 app/krslots.cpp:407
-#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1382
+#: app/krslots.cpp:473 app/Synchronizer/synchronizer.cpp:1381
 #, fuzzy, kde-format
 #| msgid "Error executing %1!"
 msgid "Error executing %1."
@@ -8331,8 +8331,8 @@ msgstr ""
 "Validity checking is impossible without a good CRC file. Continue combining?"
 
 #: app/Splitter/combiner.cpp:177 app/Splitter/splitter.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1110
-#: app/Synchronizer/synchronizer.cpp:1118
+#: app/Synchronizer/synchronizer.cpp:1109
+#: app/Synchronizer/synchronizer.cpp:1117
 #, fuzzy, kde-format
 msgid "File Already Exists"
 msgstr "ファイルはすでに存在します"
@@ -8578,19 +8578,19 @@ msgid "&Close"
 msgstr "閉じる(&C)"
 
 #: app/Synchronizer/synchronizedialog.cpp:180
-#: app/Synchronizer/synchronizer.cpp:1288
-#: app/Synchronizer/synchronizer.cpp:1301
+#: app/Synchronizer/synchronizer.cpp:1287
+#: app/Synchronizer/synchronizer.cpp:1300
 #, fuzzy, kde-format
 msgid "Pause"
 msgstr "一時停止"
 
 #: app/Synchronizer/synchronizedialog.cpp:188
-#: app/Synchronizer/synchronizer.cpp:1303
+#: app/Synchronizer/synchronizer.cpp:1302
 #, fuzzy, kde-format
 msgid "Resume"
 msgstr "再開"
 
-#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:635
+#: app/Synchronizer/synchronizer.cpp:154 app/Synchronizer/synchronizer.cpp:634
 #, fuzzy, kde-format
 msgid "Number of files: %1"
 msgstr "番号 1"
@@ -8600,23 +8600,23 @@ msgstr "番号 1"
 msgid "Number of compared folders: %1"
 msgstr "番号 1"
 
-#: app/Synchronizer/synchronizer.cpp:1159
-#: app/Synchronizer/synchronizer.cpp:1164
+#: app/Synchronizer/synchronizer.cpp:1158
+#: app/Synchronizer/synchronizer.cpp:1163
 #, fuzzy, kde-format
 msgid "Error at copying file %1 to %2."
 msgstr "エラー to!"
 
-#: app/Synchronizer/synchronizer.cpp:1169
+#: app/Synchronizer/synchronizer.cpp:1168
 #, fuzzy, kde-format
 msgid "Error at deleting file %1."
 msgstr "エラー!"
 
-#: app/Synchronizer/synchronizer.cpp:1336
+#: app/Synchronizer/synchronizer.cpp:1335
 #, fuzzy, kde-format
 msgid "Krusader::Synchronizer"
 msgstr "Krusader:検索"
 
-#: app/Synchronizer/synchronizer.cpp:1337
+#: app/Synchronizer/synchronizer.cpp:1336
 #, fuzzy, kde-format
 msgid "Feeding the URLs to KGet"
 msgstr "URLs to"
