@@ -173,5 +173,5 @@ void SizeCalculator::done()
 
 void SizeCalculator::emitProgress()
 {
-    emit progressChanged(((m_urls.length() - m_nextUrls.length()) * 100) / m_urls.length());
+    emit progressChanged(int(((m_urls.length() - m_nextUrls.length()) * 100) / m_urls.length()));
 }
