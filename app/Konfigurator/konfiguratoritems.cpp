@@ -715,7 +715,7 @@ void KonfiguratorColorChooser::setValue(const QString &value)
             setCurrentIndex(0);
             for (qsizetype i = 2 + additionalColors.size(); i != palette.size(); i++)
                 if (palette[i] == color) {
-                    setCurrentIndex(int(i));
+                    setCurrentIndex(static_cast<int>(i));
                     break;
                 }
         }

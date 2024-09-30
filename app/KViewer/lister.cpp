@@ -245,7 +245,7 @@ void ListerTextArea::fileToTextPositionOnScreen(const qint64 p, const bool isfir
             stream.read(_rowContent[y - 1].length());
             if (previousRow + stream.pos() == p) {
                 y--;
-                x = int(_rowContent[y].length());
+                x = static_cast<int>(_rowContent[y].length());
             }
         }
         return;
@@ -254,7 +254,7 @@ void ListerTextArea::fileToTextPositionOnScreen(const qint64 p, const bool isfir
     const QByteArray chunk = _lister->cacheChunk(rowStart, maxBytes);
     const QByteArray cachedBuffer = chunk.left(static_cast<int>(p - rowStart));
 
-    x = int(_lister->codec()->toUnicode(cachedBuffer).length());
+    x = static_cast<int>(_lister->codec()->toUnicode(cachedBuffer).length());
 }
 
 void ListerTextArea::getCursorPosition(int &x, int &y)
@@ -267,7 +267,7 @@ void ListerTextArea::getScreenPosition(const int position, int &x, int &y)
     x = position;
     y = 0;
     for (const QString &row : std::as_const(_rowContent)) {
-        const int rowLen = int(row.length()) + 1;
+        const int rowLen = static_cast<int>(row.length()) + 1;
         if (x < rowLen) {
             return;
         }
@@ -290,12 +290,12 @@ void ListerTextArea::setCursorPositionOnScreen(const int x, const int y, const i
 
         if (finalY == -2) {
             finalY = _sizeY;
-            finalX = (_rowContent.count() > _sizeY) ? int(_rowContent[_sizeY].length()) : 0;
+            finalX = (_rowContent.count() > _sizeY) ? static_cast<int>(_rowContent[_sizeY].length()) : 0;
         } else
             finalX = finalY = 0;
     }
 
-    const int realSizeY = std::min(_sizeY + 1, int(_rowContent.count()));
+    const int realSizeY = std::min(_sizeY + 1, static_cast<int>(_rowContent.count()));
 
     const auto setUpCursor = [&](const int cursorX, const int cursorY, const QTextCursor::MoveMode mode) -> bool {
         if (cursorY > realSizeY) {
@@ -380,7 +380,7 @@ void ListerTextArea::setCursorPositionInDocument(const qint64 p, const bool isfi
                 anchorX = 0;
             }
             if (anchorBelow && _rowContent.count() > 0) {
-                anchorX = int(_rowContent[0].length());
+                anchorX = static_cast<int>(_rowContent[0].length());
             }
         }
 
@@ -555,7 +555,7 @@ void ListerTextArea::setUpScrollBar()
         if (list.count() <= _sizeY) {
             _lastPageStartPos = 0;
         } else {
-            readLines(pageStartPos, _lastPageStartPos, int(list.count()) - _sizeY);
+            readLines(pageStartPos, _lastPageStartPos, static_cast<int>(list.count()) - _sizeY);
         }
 
         const qint64 maximum = (_lastPageStartPos > SLIDER_MAX) ? SLIDER_MAX : _lastPageStartPos;
@@ -636,9 +636,9 @@ void ListerTextArea::keyPressEvent(QKeyEvent *ke)
             slotActionTriggered(QAbstractSlider::SliderPageStepAdd);
             y += _sizeY - _skippedLines;
             if (y > _rowContent.count()) {
-                y = int(_rowContent.count()) - 1;
+                y = static_cast<int>(_rowContent.count()) - 1;
                 if (y > 0)
-                    x = int(_rowContent[y - 1].length());
+                    x = static_cast<int>(_rowContent[y - 1].length());
                 else
                     x = 0;
             }

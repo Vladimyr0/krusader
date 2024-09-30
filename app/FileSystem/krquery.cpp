@@ -404,7 +404,7 @@ bool KrQuery::checkBuffer(const char *data, qsizetype len) const
 
     for (qsizetype enterIndex = 0; enterIndex < maxBuffer; enterIndex++) {
         if (memcmp(mergedBuffer + enterIndex, encodedEnter, encodedEnterLen) == 0) {
-            QString str = codec->toUnicode(mergedBuffer + lastLinePosition, int(enterIndex + encodedEnterLen - lastLinePosition));
+            QString str = codec->toUnicode(mergedBuffer + lastLinePosition, static_cast<int>(enterIndex + encodedEnterLen - lastLinePosition));
             if (str.endsWith('\n')) {
                 str.chop(1);
                 result = result || checkLine(str);
@@ -416,7 +416,7 @@ bool KrQuery::checkBuffer(const char *data, qsizetype len) const
     }
 
     if (maxLen - lastLinePosition > MAX_LINE_LEN || len == 0) {
-        QString str = codec->toUnicode(mergedBuffer + lastLinePosition, int(maxLen - lastLinePosition));
+        QString str = codec->toUnicode(mergedBuffer + lastLinePosition, static_cast<int>(maxLen - lastLinePosition));
         result = result || checkLine(str);
         lastLinePosition = maxLen;
     }

@@ -77,7 +77,7 @@ void ListModel::clear(bool emitLayoutChanged)
 
 int ListModel::rowCount(const QModelIndex & /*parent*/) const
 {
-    return int(_fileItems.count());
+    return static_cast<int>(_fileItems.count());
 }
 
 int ListModel::columnCount(const QModelIndex & /*parent*/) const
@@ -306,7 +306,7 @@ QModelIndex ListModel::addItem(FileItem *fileitem)
     emit layoutAboutToBeChanged();
 
     if (lastSortOrder() == KrViewProperties::NoColumn) {
-        int idx = int(_fileItems.count());
+        int idx = static_cast<int>(_fileItems.count());
         _fileItems.append(fileitem);
         updateIndices(fileitem, idx);
         emit layoutChanged();
@@ -344,7 +344,7 @@ QModelIndex ListModel::addItem(FileItem *fileitem)
 
 void ListModel::removeItem(FileItem *fileItem)
 {
-    const int rowToRemove = int(_fileItems.indexOf(fileItem));
+    const int rowToRemove = static_cast<int>(_fileItems.indexOf(fileItem));
     if (rowToRemove < 0)
         return;
 

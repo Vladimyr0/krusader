@@ -574,7 +574,7 @@ KIO::WorkerResult kio_krarcProtocol::get(const QUrl &url, int tries)
 
         char buffer[MAX_IPC_SIZE];
         while (1) {
-            int n = int(::read(fd, buffer, MAX_IPC_SIZE));
+            int n = static_cast<int>(::read(fd, buffer, MAX_IPC_SIZE));
             if (n == -1) {
                 if (errno == EINTR)
                     continue;
@@ -1402,7 +1402,7 @@ void kio_krarcProtocol::parseLine(int lineNo, QString line)
         // ignore the next field
         nextWord(line);
         // date & time
-        int month = int((QString("Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec").split(',')).indexOf(nextWord(line))) + 1;
+        int month = static_cast<int>((QString("Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec").split(',')).indexOf(nextWord(line))) + 1;
         int day = nextWord(line).toInt();
         int year = QDate::currentDate().year();
         QString third = nextWord(line);

@@ -40,7 +40,7 @@ public:
     bool isSelected(const QModelIndex &ndx) override;
     int numSelected() const override
     {
-        return int(_selection.count());
+        return static_cast<int>(_selection.count());
     }
     QList<QUrl> selectedUrls() override;
     void setSelectionUrls(const QList<QUrl> urls) override;

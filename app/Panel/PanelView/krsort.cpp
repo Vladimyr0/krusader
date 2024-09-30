@@ -315,9 +315,9 @@ int Sorter::insertIndex(FileItem *fileitem, bool isDummy, QVariant customData)
     const QVector<SortProps *>::iterator it = std::lower_bound(_items.begin(), _items.end(), &props, descending() ? _greaterThanFunc : _lessThanFunc);
 
     if (it != _items.end())
-        return int(_items.indexOf((*it)));
+        return static_cast<int>(_items.indexOf((*it)));
     else
-        return int(_items.count());
+        return static_cast<int>(_items.count());
 }
 
 bool Sorter::descending() const

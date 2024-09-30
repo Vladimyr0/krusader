@@ -67,7 +67,7 @@ void KrViewItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index
         else {
             QString nameWithoutExt = index.data(Qt::UserRole).toString();
             lineEdit->deselect();
-            lineEdit->setSelection(0, int(nameWithoutExt.length()));
+            lineEdit->setSelection(0, static_cast<int>(nameWithoutExt.length()));
         }
 
         KrColorSettings colorSettings;
@@ -184,7 +184,7 @@ public:
 static QList<EditorSelection> generateFileNameSelections(const QString &text)
 {
     auto selections = QList<EditorSelection>();
-    auto length = int(text.length());
+    auto length = static_cast<int>(text.length());
     auto parts = text.split('.');
 
     // append full selection
@@ -195,7 +195,7 @@ static QList<EditorSelection> generateFileNameSelections(const QString &text)
     bool isFirstPart = true;
     for (auto part : parts) {
         // if the part is not the first one, we need to add one character to account for the dot
-        selectionLength += int(part.length()) + !isFirstPart;
+        selectionLength += static_cast<int>(part.length()) + !isFirstPart;
         isFirstPart = false;
         // if we reached the full length, don't add the selection, since it's a full selection
         if (selectionLength == length)
@@ -212,7 +212,7 @@ static QList<EditorSelection> generateFileNameSelections(const QString &text)
     isFirstPart = true;
     for (auto part : parts) {
         // if the part is not the first one, we need to add one character to account for the dot
-        selectionLength += int(part.length()) + !isFirstPart;
+        selectionLength += static_cast<int>(part.length()) + !isFirstPart;
         isFirstPart = false;
         // if we reached the full length, don't add the selection, since it's a full selection
         if (selectionLength == length)
