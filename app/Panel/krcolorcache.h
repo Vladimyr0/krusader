@@ -33,7 +33,7 @@
  * color, numeric (int) and boolean.
  * Color properties can have string or color values.
  * Property values can be changed.
- * These changes does not go into krConfig!
+ * These changes do not go into krConfig!
  *
  * is*Valid checks, if a property name is valid
  * get*Names returns a list of all allowed property names
