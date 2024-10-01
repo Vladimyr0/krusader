@@ -33,6 +33,8 @@ QString PackGUI::destination = nullptr;
 QString PackGUI::type = nullptr;
 QMap<QString, QString> PackGUI::extraProps;
 
+// #AppConfig Reads "Archives/Supported Packers"
+// #AppState Reads "Archives/lastUsedPacker"
 PackGUI::PackGUI(const QString &defaultName, const QString &defaultPath, int noOfFiles, const QString &filename)
     : PackGUIBase(nullptr)
 {
@@ -44,7 +46,7 @@ PackGUI::PackGUI(const QString &defaultName, const QString &defaultPath, int noO
 
     // now, according to the Konfigurator, fill the combobox with the information
     // about what kind of packing we can do
-    KConfigGroup group(krConfig, "Archives");
+    KConfigGroup group(krConfig, "Archives");  // tagged
     QStringList lst = group.readEntry("Supported Packers", QStringList());
     // now, clear the type combo and begin...
     typeData->clear();
@@ -73,7 +75,7 @@ PackGUI::PackGUI(const QString &defaultName, const QString &defaultPath, int noO
     if (PS("7z"))
         typeData->addItem("7z");
     // set the last used packer as the top one
-    QString tmp = krState->group("Archives").readEntry("lastUsedPacker", QString());
+    QString tmp = krState->group("Archives").readEntry("lastUsedPacker", QString());  // tagged
     if (!tmp.isEmpty()) {
         for (int i = 0; i < typeData->count(); ++i)
             if (typeData->itemText(i) == tmp) {
@@ -103,6 +105,8 @@ void PackGUI::browse()
     }
 }
 
+// #AppState Writes "Archives/lastUsedPacker"
+// #AppState Writes "Archives/Command Line Switches"
 void PackGUI::accept()
 {
     if (!extraProperties(extraProps))
@@ -112,7 +116,7 @@ void PackGUI::accept()
     destination = dirData->text();
     type = typeData->currentText();
     // write down the packer chosen, to be lastUsedPacker
-    KConfigGroup group(krState, "Archives");
+    KConfigGroup group(krState, "Archives");  // tagged
     group.writeEntry("lastUsedPacker", type);
 
     group.writeEntry("Command Line Switches", commandLineSwitches->historyItems());
@@ -120,6 +124,7 @@ void PackGUI::accept()
     PackGUIBase::accept();
 }
 
+// #AppState Writes "Archives/Command Line Switches"
 void PackGUI::reject()
 {
     filename.clear();
@@ -127,7 +132,7 @@ void PackGUI::reject()
     type.clear();
     // If e.g. the user has deleted a command line switch from the list, that's
     // taken into account even if a file is not packed afterwards
-    KConfigGroup group(krState, "Archives");
+    KConfigGroup group(krState, "Archives");  // tagged
     group.writeEntry("Command Line Switches", commandLineSwitches->historyItems());
 
     PackGUIBase::reject();

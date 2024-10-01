@@ -64,9 +64,11 @@ void PopularUrls::clearList()
     head = tail = nullptr;
 }
 
+// #AppState Writes "Private/PopularUrls"
+// #AppState Writes "Private/PopularUrlsRank"
 void PopularUrls::save()
 {
-    KConfigGroup svr(krState, "Private");
+    KConfigGroup svr(krState, "Private");  // tagged
     // prepare the string list containing urls and int list with ranks
     QStringList urlList;
     QList<int> rankList;
@@ -80,9 +82,11 @@ void PopularUrls::save()
     svr.writeEntry("PopularUrlsRank", rankList);
 }
 
+// #AppState Reads "Private/PopularUrls"
+// #AppState Reads "Private/PopularUrlsRank"
 void PopularUrls::load()
 {
-    KConfigGroup svr(krState, "Private");
+    KConfigGroup svr(krState, "Private");  // tagged
     QStringList urlList = svr.readEntry("PopularUrls", QStringList());
     QList<int> rankList = svr.readEntry("PopularUrlsRank", QList<int>());
     if (urlList.count() != rankList.count()) {
