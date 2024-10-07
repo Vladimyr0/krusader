@@ -17,6 +17,8 @@
 #include <QHeaderView>
 #include <QWidget>
 
+#include <KSharedConfig>
+
 #include "krinterview.h"
 
 /**
@@ -26,7 +28,7 @@ class KrInterBriefView : public QAbstractItemView, public KrInterView
 {
     Q_OBJECT
 public:
-    KrInterBriefView(QWidget *parent, KrViewInstance &instance, KConfig *cfg);
+    KrInterBriefView(QWidget *parent, KrViewInstance &instance, KSharedConfig::Ptr cfg);
     ~KrInterBriefView() override;
 
     // ---- reimplemented from QAbstractItemView ----

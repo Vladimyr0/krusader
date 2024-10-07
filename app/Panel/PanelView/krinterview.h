@@ -15,6 +15,8 @@
 // QtWidgets
 #include <QAbstractItemView>
 
+#include <KSharedConfig>
+
 #include "krview.h"
 
 class ListModel;
@@ -31,7 +33,7 @@ class KrInterView : public KrView
     friend class KrViewItem;
 
 public:
-    KrInterView(KrViewInstance &instance, KConfig *cfg, QAbstractItemView *itemView);
+    KrInterView(KrViewInstance &instance, KSharedConfig::Ptr cfg, QAbstractItemView *itemView);
     virtual ~KrInterView();
     QModelIndex getCurrentIndex() override
     {

@@ -41,6 +41,9 @@ const QStringList sProtocols = QStringList() << QStringLiteral("ftp") << QString
  * Constructs a newFTPGUI which is a child of 'parent',
  * with the name 'name' and widget flags set to 'f'
  */
+// #AppState Reads "Private/newFTP Completion list"
+// #AppState Reads "Private/newFTP History list"
+// #AppState Reads "Private/newFTP Protocol"
 newFTPGUI::newFTPGUI(QWidget *parent)
     : QDialog(parent)
 {
@@ -83,7 +86,7 @@ newFTPGUI::newFTPGUI(QWidget *parent)
     }
 
     // load the history and completion list after creating the history combo
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");  // tagged
     QStringList list = group.readEntry("newFTP Completion list", QStringList());
     url->completionObject()->setItems(list);
     list = group.readEntry("newFTP History list", QStringList());

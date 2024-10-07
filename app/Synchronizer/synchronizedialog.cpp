@@ -97,7 +97,7 @@ SynchronizeDialog::SynchronizeDialog(QWidget *parent,
     hbox->setSpacing(6);
 
     cbOverwrite = new QCheckBox(i18n("Confirm overwrites"), this);
-    KConfigGroup group(krConfig, "Synchronize");
+    KConfigGroup group(krState, "Synchronize");
     cbOverwrite->setChecked(group.readEntry("Confirm overwrites", _ConfirmOverWrites));
     layout->addWidget(cbOverwrite);
 
@@ -138,7 +138,7 @@ SynchronizeDialog::SynchronizeDialog(QWidget *parent,
 
 SynchronizeDialog::~SynchronizeDialog()
 {
-    KConfigGroup group(krConfig, "Synchronize");
+    KConfigGroup group(krState, "Synchronize");
     group.writeEntry("Confirm overwrites", cbOverwrite->isChecked());
 }
 

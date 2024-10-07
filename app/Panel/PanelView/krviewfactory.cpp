@@ -34,7 +34,7 @@ public:
     {
     }
 
-    KrView *create(QWidget *w, KConfig *cfg) override
+    KrView *create(QWidget *w, KSharedConfig::Ptr cfg) override
     {
         return new T(w, *this, cfg);
     }
@@ -64,7 +64,7 @@ void KrViewFactory::init()
     registerView(new KrViewInstanceImpl<KrInterBriefView>(1, "KrInterBriefView", i18n("&Brief View"), "view-list-icons", Qt::ALT | Qt::SHIFT | Qt::Key_B));
 }
 
-KrView *KrViewFactory::createView(int id, QWidget *widget, KConfig *cfg)
+KrView *KrViewFactory::createView(int id, QWidget *widget, KSharedConfig::Ptr cfg)
 {
     return self().viewInstance(id)->create(widget, cfg);
 }

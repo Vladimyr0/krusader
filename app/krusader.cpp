@@ -102,12 +102,28 @@ Krusader::Krusader(const QCommandLineParser &parser)
     QString message;
     switch (krConfig->accessMode()) {
     case KConfigBase::NoAccess:
-        message = "Krusader's configuration file can't be found. Default values will be used.";
+        message = i18n("Krusader configuration file can't be accessed. Default values will be used.");
         break;
     case KConfigBase::ReadOnly:
-        message = "Krusader's configuration file is in READ ONLY mode (why is that!?) Changed values will not be saved";
+        message = i18n("Krusader configuration file is in Read Only mode. Changes will not be saved.");
         break;
     case KConfigBase::ReadWrite:
+        message = "";
+        break;
+    }
+    if (!message.isEmpty()) {
+        KMessageBox::error(krApp, message);
+    }
+
+    message = "";
+    switch (krState->accessMode()) {
+    case KConfigBase::NoAccess :
+        message = i18n("Krusader state file can't be accessed. Default values will be used.");
+        break;
+    case KConfigBase::ReadOnly :
+        message = i18n("Krusader state file is in Read Only mode. Changes will not be saved.");
+        break;
+    case KConfigBase::ReadWrite :
         message = "";
         break;
     }
@@ -203,6 +219,15 @@ Krusader::Krusader(const QCommandLineParser &parser)
         // not using this. See savePosition()
         // applyMainWindowSettings();
 
+        const KConfigGroup cfgToolbar(krState, "Main Toolbar");
+        toolBar()->applySettings(cfgToolbar);
+
+        const KConfigGroup cfgJobBar(krState, "Job Toolbar");
+        toolBar("jobToolBar")->applySettings(cfgJobBar);
+
+        const KConfigGroup cfgActionsBar(krState, "Actions Toolbar");
+        toolBar("actionsToolBar")->applySettings(cfgActionsBar);
+
         // restore toolbars position and visibility
         restoreState(startupGroup.readEntry("State", QByteArray()));
 
@@ -215,14 +240,14 @@ Krusader::Krusader(const QCommandLineParser &parser)
     if (runKonfig)
         SLOTS->runKonfigurator(true);
 
-    KConfigGroup viewerModuleGrp(krConfig, "ViewerModule");
+    KConfigGroup viewerModuleGrp(krState, "ViewerModule");
     if (viewerModuleGrp.readEntry("FirstRun", true)) {
         KrViewer::configureDeps();
         viewerModuleGrp.writeEntry("FirstRun", false);
     }
 
     if (!runKonfig) {
-        KConfigGroup cfg(krConfig, "Private");
+        KConfigGroup cfg(krState, "Private");
         move(cfg.readEntry("Start Position", _StartPosition));
         resize(cfg.readEntry("Start Size", _StartSize));
     }
@@ -285,22 +310,41 @@ void Krusader::setTray(bool forceCreation)
 
 bool Krusader::versionControl()
 {
-    // create config file
-    krConfig = KSharedConfig::openConfig().data();
-    KConfigGroup nogroup(krConfig, QString());
-    const bool firstRun = nogroup.readEntry("First Time", true);
-    KrGlobal::sCurrentConfigVersion = nogroup.readEntry("Config Version", -1);
+    // create config files
+    krConfig = KSharedConfig::openConfig();
+    krState = KSharedConfig::openStateConfig();
 
-    // first installation of krusader
+    KConfigGroup configTopLevel(krConfig, QString());
+
+    KrGlobal::sCurrentConfigVersion = configTopLevel.readEntry("Config Version", -1);
+
+    // if Krusader is being started for the first time, display a welcome message and a wizard
+    const bool firstRun = configTopLevel.readEntry("First Time", true);
     if (firstRun) {
         KMessageBox::information(krApp,
                                  i18n("<qt><b>Welcome to Krusader.</b><p>As this is your first run, your machine "
                                       "will now be checked for external applications. Then the Konfigurator will "
                                       "be launched where you can customize Krusader to your needs.</p></qt>"));
     }
-    nogroup.writeEntry("Version", VERSION);
-    nogroup.writeEntry("First Time", false);
+    configTopLevel.writeEntry("First Time", false);
     krConfig->sync();
+
+    KConfigGroup stateTopLevel(krState, QString());
+    stateTopLevel.writeEntry("Recent App Version", VERSION);
+    krState->sync();
+
+    // check for Config Version mismatch between Config and State files
+    // that should never happen unless the files are tinkered with
+    int stateConfigVersion = stateTopLevel.readEntry("Config Version", -1);
+    if (stateConfigVersion >= 0 && KrGlobal::sCurrentConfigVersion != stateConfigVersion) {
+        KMessageBox::error(this, i18n("Config and State format version mismatch. "
+                                      "Before closing Krusader please copy files ~/.config/krusaderrc "
+                                      "and ~/.local/share/krusader/krusaderstaterc to another location."
+                                      "Please attach these files to a bug report at bugs.kde.org."));
+    }
+
+    qDebug() << "App config file location:" << krConfig->locationType() << krConfig->name();
+    qDebug() << "App state file location:" << krState->locationType() << krState->name();
 
     QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krusader/"));
 
@@ -344,11 +388,11 @@ void Krusader::setupActions()
 
 void Krusader::savePosition()
 {
-    KConfigGroup cfg(krConfig, "Private");
+    KConfigGroup cfg(krState, "Private");
     cfg.writeEntry("Start Position", pos());
     cfg.writeEntry("Start Size", size());
 
-    cfg = krConfig->group("Startup");
+    cfg = krState->group("Startup");
     MAIN_VIEW->saveSettings(cfg);
 
     // NOTE: this would save current window state/size, statusbar and settings for each toolbar.
@@ -361,7 +405,7 @@ void Krusader::savePosition()
     // saveMainWindowSettings(cfg);
     // statusBar()->setVisible(cfg.readEntry("StatusBar", "Enabled") != "Disabled");
 
-    krConfig->sync();
+    krState->sync();
 }
 
 void Krusader::saveSettings()
@@ -374,17 +418,19 @@ void Krusader::saveSettings()
         MAIN_VIEW->setTerminalEmulator(false, true);
     }
 
-    KConfigGroup noGroup(krConfig, QString());
-    noGroup.writeEntry("Config Version", KrGlobal::sConfigVersion);
+    // by this time all the config conversions should be complete
+    krConfig->group(QString()).writeEntry("Config Version", KrGlobal::sConfigVersion);
+    krState->group(QString()).writeEntry("Config Version", KrGlobal::sConfigVersion);
 
-    KConfigGroup cfg(krConfig, "Main Toolbar");
+    KConfigGroup cfg(krState, "Main Toolbar");
+    toolBar()->saveSettings(cfg);
 
-    cfg = krConfig->group("Startup");
+    cfg = krState->group("Startup");
     // save toolbar visibility and position
     cfg.writeEntry("State", saveState());
 
     // save panel and window settings
-    if (cfg.readEntry("Remember Position", _RememberPos))
+    if (krConfig->group("Startup").readEntry("Remember Position", _RememberPos))
         savePosition();
 
     // save the gui components visibility
@@ -397,7 +443,7 @@ void Krusader::saveSettings()
     // save popular links
     _popularUrls->save();
 
-    krConfig->sync();
+    krState->sync();
 }
 
 void Krusader::closeEvent(QCloseEvent *event)

@@ -173,7 +173,7 @@ void SynchronizerGUI::initGUI(const QString &profileName, QUrl leftURL, QUrl rig
     rightDirLabel->setAlignment(Qt::AlignHCenter);
     grid->addWidget(rightDirLabel, 0, 2);
 
-    KConfigGroup group(krConfig, "Synchronize");
+    KConfigGroup group(krState, "Synchronize");
 
     leftLocation = new KrHistoryComboBox(false, compareDirs);
     leftLocation->setMaxCount(25); // remember 25 items
@@ -892,7 +892,7 @@ void SynchronizerGUI::closeDialog()
         return;
     }
 
-    KConfigGroup group(krConfig, "Synchronize");
+    KConfigGroup group(krState, "Synchronize");
 
     QStringList list;
 
@@ -1468,7 +1468,7 @@ void SynchronizerGUI::loadFromProfile(const QString &profile)
 
 void SynchronizerGUI::saveToProfile(const QString &profile)
 {
-    KConfigGroup group(krConfig, profile);
+    KConfigGroup group(krState, profile);
 
     group.writeEntry("Left Location", leftLocation->currentText());
     group.writeEntry("Search For", fileFilter->currentText());

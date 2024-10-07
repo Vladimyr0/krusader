@@ -89,7 +89,7 @@ KMountManGUI::KMountManGUI(KMountMan *mntMan)
     connect(mountList, &KrTreeWidget::itemClicked, this, QOverload<QTreeWidgetItem *>::of(&KMountManGUI::changeActive));
     connect(mountList, &KrTreeWidget::itemSelectionChanged, this, QOverload<>::of(&KMountManGUI::changeActive));
 
-    KConfigGroup group(krConfig, "MountMan");
+    KConfigGroup group(krState, "MountMan");
     int sx = group.readEntry("Window Width", -1);
     int sy = group.readEntry("Window Height", -1);
 
@@ -113,7 +113,7 @@ KMountManGUI::~KMountManGUI()
     watcher->stop();
     delete watcher;
 
-    KConfigGroup group(krConfig, "MountMan");
+    KConfigGroup group(krState, "MountMan");
 
     group.writeEntry("Window Width", sizeX);
     group.writeEntry("Window Height", sizeY);

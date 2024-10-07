@@ -82,7 +82,7 @@ FeedToListBoxDialog::FeedToListBoxDialog(QWidget *parent, Synchronizer *sync, QT
     if (!virtFilesystem.scanDir(QUrl("virt:/")))
         return;
 
-    KConfigGroup group(krConfig, "Synchronize");
+    KConfigGroup group(krState, "Synchronize");
     int listBoxNum = group.readEntry("Feed To Listbox Counter", 1);
     QString queryName;
     do {

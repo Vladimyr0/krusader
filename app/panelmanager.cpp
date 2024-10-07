@@ -320,7 +320,7 @@ void PanelManager::slotDuplicateTab(const QUrl &url, KrPanel *nextTo, int insert
         // settings directly would add too much complexity.
         QString grpName = "PanelManager_" + QString::number(qApp->applicationPid());
         krConfig->deleteGroup(grpName); // make sure the group is empty
-        KConfigGroup cfg(krConfig, grpName);
+        KConfigGroup cfg(krState, grpName);
 
         nextTo->gui->saveSettings(cfg, true);
         // reset undesired duplicated settings
@@ -365,7 +365,7 @@ void PanelManager::slotCloseTab(int index)
     // based on the one of slotDuplicateTab()
     QString grpName = QString("closedTab_%1").arg(reinterpret_cast<qulonglong>(actReopenTab));
     krConfig->deleteGroup(grpName); // make sure the group is empty
-    KConfigGroup cfg(krConfig, grpName);
+    KConfigGroup cfg(krState, grpName);
     panel->gui->saveSettings(cfg, true);
     // reset undesired duplicated settings
     cfg.writeEntry("Properties", 0);
@@ -412,7 +412,7 @@ void PanelManager::undoCloseTab(const QAction *action)
     // Restore settings of the tab. Note: The code is
     // based on the one of slotDuplicateTab()
     QString grpName = QString("closedTab_%1").arg(reinterpret_cast<qulonglong>(action));
-    KConfigGroup cfg(krConfig, grpName);
+    KConfigGroup cfg(krState, grpName);
     ListPanel *panel = static_cast<ListPanel *>(whereToUndo->currentPanel());
     panel->restoreSettings(cfg);
     krConfig->deleteGroup(grpName);
@@ -481,7 +481,7 @@ void PanelManager::slotRecreatePanels()
     for (int i = 0; i != _tabbar->count(); i++) {
         QString grpName = "PanelManager_" + QString::number(qApp->applicationPid());
         krConfig->deleteGroup(grpName); // make sure the group is empty
-        KConfigGroup cfg(krConfig, grpName);
+        KConfigGroup cfg(krState, grpName);
 
         ListPanel *oldPanel = _tabbar->getPanel(i);
         oldPanel->view->setFileIconSize(oldPanel->view->defaultFileIconSize());

@@ -365,7 +365,7 @@ void KrSlots::toggleSwapSides()
 void KrSlots::search()
 {
     if (KrSearchDialog::SearchDialog != nullptr) {
-        KConfigGroup group(krConfig, "Search");
+        KConfigGroup group(krState, "Search");
         if (group.readEntry("Window Maximized", false))
             KrSearchDialog::SearchDialog->showMaximized();
         else
@@ -657,7 +657,7 @@ void KrSlots::compareSetup()
 {
     for (int i = 0; KrActions::compareArray[i] != nullptr; i++)
         if ((*KrActions::compareArray[i])->isChecked()) {
-            KConfigGroup group(krConfig, "Private");
+            KConfigGroup group(krState, "Private");
             group.writeEntry("Compare Mode", i);
             break;
         }
@@ -672,7 +672,7 @@ void KrSlots::execTypeSetup()
                 // if commands are to be executed in the TE, it must be loaded
                 MAIN_VIEW->terminalDock()->initialise();
             }
-            KConfigGroup grp(krConfig, "Private");
+            KConfigGroup grp(krState, "Private");
             grp.writeEntry("Command Execution Mode", i);
             break;
         }

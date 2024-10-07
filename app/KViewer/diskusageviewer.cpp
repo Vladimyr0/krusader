@@ -31,7 +31,7 @@ DiskUsageViewer::DiskUsageViewer(QWidget *parent)
 DiskUsageViewer::~DiskUsageViewer()
 {
     if (diskUsage) {
-        KConfigGroup group(krConfig, "DiskUsageViewer");
+        KConfigGroup group(krState, "DiskUsageViewer");
         group.writeEntry("View", diskUsage->getActiveView());
         delete diskUsage;
     }
@@ -51,7 +51,7 @@ void DiskUsageViewer::openUrl(QUrl url)
         this->show();
         diskUsage->show();
 
-        KConfigGroup group(krConfig, "DiskUsageViewer");
+        KConfigGroup group(krState, "DiskUsageViewer");
         int view = group.readEntry("View", VIEW_FILELIGHT);
         if (view < VIEW_LINES || view > VIEW_FILELIGHT)
             view = VIEW_FILELIGHT;

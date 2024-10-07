@@ -13,7 +13,8 @@
 
 #include <KActionCollection>
 
-KConfig *KrGlobal::config = nullptr;
+KSharedConfig::Ptr KrGlobal::state;
+KSharedConfig::Ptr KrGlobal::config;
 KMountMan *KrGlobal::mountMan = nullptr;
 KrArcHandler *KrGlobal::arcMan = nullptr;
 KrBookmarkHandler *KrGlobal::bookman = nullptr;

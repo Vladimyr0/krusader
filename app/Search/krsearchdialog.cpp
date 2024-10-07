@@ -131,7 +131,7 @@ KrSearchDialog::KrSearchDialog(const QString &profile, QWidget *parent)
     , isBusy(false)
     , closed(false)
 {
-    KConfigGroup group(krConfig, "Search");
+    KConfigGroup group(krState, "Search");
 
     setWindowTitle(i18n("Krusader::Search"));
     setWindowIcon(Icon("system-search"));
@@ -154,7 +154,7 @@ KrSearchDialog::KrSearchDialog(const QString &profile, QWidget *parent)
     searchTextToClipboard->setToolTip(i18n("Place search text to clipboard when a found file is opened."));
     searchTextToClipboard->setCheckState(static_cast<Qt::CheckState>(group.readEntry("QueryToClipboard", 0)));
     connect(searchTextToClipboard, &QCheckBox::stateChanged, this, [=](int state) {
-        KConfigGroup group(krConfig, "Search");
+        KConfigGroup group(krState, "Search");
         group.writeEntry("QueryToClipboard", state);
     });
     buttonsLayout->addWidget(searchTextToClipboard);
@@ -356,7 +356,7 @@ void KrSearchDialog::closeDialog(bool isAccept)
 
     // saving the searcher state
 
-    KConfigGroup group(krConfig, "Search");
+    KConfigGroup group(krState, "Search");
 
     group.writeEntry("Window Width", sizeX);
     group.writeEntry("Window Height", sizeY);
@@ -605,7 +605,7 @@ void KrSearchDialog::feedToListBox()
     VirtualFileSystem virtFilesystem;
     virtFilesystem.scanDir(QUrl::fromLocalFile("/"));
 
-    KConfigGroup group(krConfig, "Search");
+    KConfigGroup group(krState, "Search");
     int listBoxNum = group.readEntry("Feed To Listbox Counter", 1);
     QString queryName;
     if (query) {

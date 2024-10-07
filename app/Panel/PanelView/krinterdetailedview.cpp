@@ -35,7 +35,7 @@
 #include "krviewitemdelegate.h"
 #include "listmodel.h"
 
-KrInterDetailedView::KrInterDetailedView(QWidget *parent, KrViewInstance &instance, KConfig *cfg)
+KrInterDetailedView::KrInterDetailedView(QWidget *parent, KrViewInstance &instance, KSharedConfig::Ptr cfg)
     : QTreeView(parent)
     , KrInterView(instance, cfg, this)
     , _autoResizeColumns(true)
@@ -117,7 +117,7 @@ void KrInterDetailedView::doRestoreSettings(KConfigGroup grp)
         headerView->restoreState(savedState);
 
         // do not show new columns by default; restoreState() shows columns not saved
-        if (KrGlobal::sCurrentConfigVersion < KrGlobal::sConfigVersion) {
+        if (KrGlobal::sCurrentConfigVersion < 1) {
             hideColumn(KrViewProperties::Changed);
             hideColumn(KrViewProperties::Accessed);
         }

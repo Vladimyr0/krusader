@@ -165,7 +165,7 @@ void KrViewOperator::saveDefaultSettings()
 
 const KrView::IconSizes KrView::iconSizes;
 
-KrView::KrView(KrViewInstance &instance, KConfig *cfg)
+KrView::KrView(KrViewInstance &instance, KSharedConfig::Ptr cfg)
     : _config(cfg)
     , _properties(nullptr)
     , _focused(false)

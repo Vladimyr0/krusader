@@ -50,6 +50,7 @@
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
  */
+// #AppState Reads "Archives/Command Line Switches"
 PackGUIBase::PackGUIBase(QWidget *parent)
     : QDialog(parent)
     , expanded(false)
@@ -263,7 +264,7 @@ PackGUIBase::PackGUIBase(QWidget *parent)
     commandLineSwitches->setDuplicatesEnabled(false);
     commandLineSwitches->setMinimumContentsLength(10);
 
-    QStringList list = group.readEntry("Command Line Switches", QStringList());
+    QStringList list = krState->group("Archives").readEntry("Command Line Switches", QStringList());  // tagged
     commandLineSwitches->setHistoryItems(list);
 
     hbox_7->addWidget(commandLineSwitches);

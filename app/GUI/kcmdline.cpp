@@ -163,7 +163,7 @@ KCMDLine::KCMDLine(QWidget *parent)
     cmdLine->setCompletionObject(&completion);
     cmdLine->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
     // load the history
-    KConfigGroup grpSvr(krConfig, "Private");
+    KConfigGroup grpSvr(krState, "Private");
     QStringList list = grpSvr.readEntry("cmdline history", QStringList());
     cmdLine->setHistoryItems(list);
 
@@ -194,7 +194,7 @@ KCMDLine::KCMDLine(QWidget *parent)
 
 KCMDLine::~KCMDLine()
 {
-    KConfigGroup grpSvr(krConfig, "Private");
+    KConfigGroup grpSvr(krState, "Private");
     QStringList list = cmdLine->historyItems();
     // qWarning() << list[0];
     grpSvr.writeEntry("cmdline history", list);
@@ -261,7 +261,7 @@ QString KCMDLine::command() const
 
 KrActionBase::ExecType KCMDLine::execType() const
 {
-    KConfigGroup grp(krConfig, "Private");
+    KConfigGroup grp(krState, "Private");
     int i = grp.readEntry("Command Execution Mode", (int)0);
     return execModesMenu[i];
 }

@@ -49,7 +49,8 @@ KrSearchBar::KrSearchBar(KrView *view, QWidget *parent)
     _textBox = new KComboBox(this);
     _textBox->setEditable(true);
     _modeBox->setToolTip(i18n("Enter or select search string"));
-    QStringList savedSearches = KConfigGroup(krConfig, "Private").readEntry("Predefined Selections", QStringList());
+    QStringList savedSearches = KConfigGroup(krState, "Private")
+                      .readEntry("Predefined Selections", QStringList());
     if (savedSearches.count() > 0)
         _textBox->addItems(savedSearches);
     _textBox->setCurrentText("");
@@ -172,7 +173,7 @@ void KrSearchBar::onSearchChange()
 
 void KrSearchBar::saveSearchString()
 {
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");
     QStringList lst = group.readEntry("Predefined Selections", QStringList());
     QString searchString = _textBox->currentText();
     if (lst.indexOf(searchString) != -1) {

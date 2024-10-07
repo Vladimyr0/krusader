@@ -378,6 +378,11 @@ void KrBookmarkHandler::populate(QMenu *menu)
     buildMenu(_root, menu);
 }
 
+// #AppState Reads "Private/BM Popular URLs"
+// #AppState Reads "Private/BM Trash"
+// #AppState Reads "Private/BM Lan"
+// #AppState Reads "Private/BM Virtual FS"
+// #AppState Reads "Private/BM Jumpback"
 void KrBookmarkHandler::buildMenu(KrBookmark *parent, QMenu *menu, int depth)
 {
     // add search bar widget to the top of the menu
@@ -428,7 +433,7 @@ void KrBookmarkHandler::buildMenu(KrBookmark *parent, QMenu *menu, int depth)
     }
 
     if (depth == 0) {
-        KConfigGroup group(krConfig, "Private");
+        KConfigGroup group(krState, "Private");  // tagged
         bool hasPopularURLs = group.readEntry("BM Popular URLs", true);
         bool hasTrash = group.readEntry("BM Trash", true);
         bool hasLan = group.readEntry("BM Lan", true);
@@ -763,9 +768,14 @@ void KrBookmarkHandler::_resetActionTextAndHighlighting()
 #define VIRTUAL_FS_ID 100102
 #define JUMP_BACK_ID 100104
 
+// #AppState Reads,Writes "Private/BM Popular URLs"
+// #AppState Reads,Writes "Private/BM Trash"
+// #AppState Reads,Writes "Private/BM Lan"
+// #AppState Reads,Writes "Private/BM Virtual FS"
+// #AppState Reads,Writes "Private/BM Jumpback"
 void KrBookmarkHandler::rightClickOnSpecialBookmark()
 {
-    KConfigGroup group(krConfig, "Private");
+    KConfigGroup group(krState, "Private");  // tagged
     bool hasPopularURLs = group.readEntry("BM Popular URLs", true);
     bool hasTrash = group.readEntry("BM Trash", true);
     bool hasLan = group.readEntry("BM Lan", true);

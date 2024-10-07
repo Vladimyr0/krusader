@@ -19,7 +19,7 @@
 #include "krviewitem.h"
 #include "listmodel.h"
 
-KrInterView::KrInterView(KrViewInstance &instance, KConfig *cfg, QAbstractItemView *itemView)
+KrInterView::KrInterView(KrViewInstance &instance, KSharedConfig::Ptr cfg, QAbstractItemView *itemView)
     : KrView(instance, cfg)
     , _itemView(itemView)
     , _mouseHandler(nullptr)
