@@ -9861,18 +9861,3 @@ msgstr "Diàleg de contrasenyes del Krarc"
 #, kde-format
 msgid "Accessing the file requires a password."
 msgstr "L'accés al fitxer requereix una contrasenya."
-
-#~ msgid "Manage Bookmarks"
-#~ msgstr "Gestiona les adreces d'interès"
-
-#~ msgid "Show Main Toolbar"
-#~ msgstr "Mostra la barra d'eines principal"
-
-#~ msgid "Show Job Toolbar"
-#~ msgstr "Mostra la barra d'eines de treballs"
-
-#~ msgid "Show Actions Toolbar"
-#~ msgstr "Mostra la barra d'eines d'accions"
-
-#~ msgid "&Toolbars"
-#~ msgstr "&Barres d'eines"
