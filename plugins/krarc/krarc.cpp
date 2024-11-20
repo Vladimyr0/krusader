@@ -1871,7 +1871,7 @@ QString kio_krarcProtocol::getPassword()
     authInfo.url.setScheme("krarc");
 
     if (checkCachedAuthentication(authInfo) && !authInfo.password.isNull()) {
-        KRDEBUG(authInfo.password);
+        // KRDEBUG(authInfo.password);
         return (password = authInfo.password);
     }
 
@@ -1879,13 +1879,13 @@ QString kio_krarcProtocol::getPassword()
 
     int errCode = openPasswordDialog(authInfo, i18n("Accessing the file requires a password."));
     if (!errCode && !authInfo.password.isNull()) {
-        KRDEBUG(authInfo.password);
+        // KRDEBUG(authInfo.password);
         return (password = authInfo.password);
     } else {
         password.clear();
     }
 
-    KRDEBUG(password);
+    // KRDEBUG(password);
     return password;
 }
 
