@@ -665,6 +665,13 @@ void ListPanelFunc::rename(const QString &oldname, const QString &newname)
     if (oldname == newname)
         return; // do nothing
 
+    if (newname.isEmpty()) {
+        // show a message to avoid that e.g. the user be fast-typing and think that everything went all right
+        KMessageBox::error(krMainWindow, i18n("The renaming of \"%1\" was not performed because the proposed name is empty.", oldname));
+        // do not continue the renaming process
+        return;
+    }
+
     // set current after rename
     panel->view->setNameToMakeCurrent(newname);
 
