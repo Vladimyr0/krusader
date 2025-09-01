@@ -6,7 +6,7 @@
     SPDX-FileCopyrightText: 2025 Wodsfort <wodsfort@gmail.com>
 -->
 
-![Screenshot of Dragon Player](https://cdn.kde.org/screenshots/krusader/krusader.png)
+![Screenshot of Krusader](https://cdn.kde.org/screenshots/krusader/krusader.png)
 [Project home page](https://krusader.org/)
 
 Krusader is an advanced twin panel (commander style) file manager for KDE Plasma and other desktops in the *nix world
