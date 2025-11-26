@@ -148,6 +148,7 @@ protected:
 
     bool first;
     bool loading;
+    bool _inSlotLoadDirectory;
     bool abortLoading;
     bool clearAfterAbort;
     bool deleting;

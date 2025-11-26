@@ -280,6 +280,13 @@ void DiskUsage::load(const QUrl &baseDir)
 
 void DiskUsage::slotLoadDirectory()
 {
+    // Prevent reentrancy caused by nested event loop
+    if (_inSlotLoadDirectory) {
+        qDebug() << "DiskUsage::slotLoadDirectory() - reentrancy detected";
+        return;
+    }
+    _inSlotLoadDirectory = true;
+
     if ((currentFileItem == nullptr && directoryStack.isEmpty()) || loaderView->wasCancelled() || abortLoading) {
         if (searchFileSystem)
             delete searchFileSystem;
@@ -299,6 +306,7 @@ void DiskUsage::slotLoadDirectory()
         emit loadFinished(!(loaderView->wasCancelled() || abortLoading));
 
         loading = abortLoading = clearAfterAbort = false;
+        _inSlotLoadDirectory = false;
     } else if (loading) {
         for (int counter = 0; counter != MAX_FILENUM; counter++) {
             if (currentFileItem == nullptr) {
@@ -377,6 +385,7 @@ void DiskUsage::slotLoadDirectory()
         loaderView->setValues(fileNum, dirNum, currentSize);
         loadingTimer.setSingleShot(true);
         loadingTimer.start(0);
+        _inSlotLoadDirectory = false;
     }
 }
 
