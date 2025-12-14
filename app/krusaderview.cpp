@@ -189,8 +189,10 @@ PanelManager *KrusaderView::createManager(bool left)
 void KrusaderView::updateCurrentActivePath()
 {
     const QString path = activePanel()->gui->lastLocalPath();
+    QFileInfo fi(path);
 
     _cmdLine->setCurrent(path);
+    emit activePathChanged(fi.fileName());
     KConfigGroup cfg = krConfig->group("General");
     if (_terminalDock->isInitialised() && cfg.readEntry("Send CDs", _SendCDs)) {
         _terminalDock->sendCd(path);
