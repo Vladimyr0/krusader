@@ -7962,13 +7962,13 @@ msgstr "Тип"
 #, kde-format
 msgctxt "File property"
 msgid "Modified"
-msgstr "Содержимое изменено"
+msgstr "Изменён"
 
 #: app/Panel/PanelView/listmodel.cpp:385
 #, kde-format
 msgctxt "File property"
 msgid "Changed"
-msgstr "Метаданные изменены"
+msgstr "Метаданные"
 
 #: app/Panel/PanelView/listmodel.cpp:387
 #, kde-format
@@ -7980,7 +7980,7 @@ msgstr "Открыт"
 #, kde-format
 msgctxt "File property"
 msgid "Perms"
-msgstr "Права доступа (расширенные)"
+msgstr "Права (расширенные)"
 
 #: app/Panel/PanelView/listmodel.cpp:391
 #, kde-format
@@ -8015,7 +8015,7 @@ msgstr "Тип: %1"
 #, kde-format
 msgctxt "File property"
 msgid "Modified: %1"
-msgstr "Содержимое изменено: %1"
+msgstr "Изменён: %1"
 
 #: app/Panel/PanelView/listmodel.cpp:501
 #, kde-format
