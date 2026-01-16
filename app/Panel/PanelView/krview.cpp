@@ -951,8 +951,15 @@ void KrView::sortModeUpdated(KrViewProperties::ColumnType sortColumn, bool desce
         options |= KrViewProperties::Descending;
     else
         options &= ~KrViewProperties::Descending;
+    bool reverse = false;
+    if (sortColumn != _properties->sortColumn) {
+        if ((sortColumn == KrViewProperties::Size) || (sortColumn == KrViewProperties::Modified) || (sortColumn == KrViewProperties::Changed) || (sortColumn == KrViewProperties::Accessed))
+            reverse = true;
+    }
     _properties->sortColumn = sortColumn;
     _properties->sortOptions = static_cast<KrViewProperties::SortOptions>(options);
+    if (reverse)
+        setSortMode(static_cast<KrViewProperties::ColumnType>(sortColumn), true);
 }
 
 bool KrView::drawCurrent() const
